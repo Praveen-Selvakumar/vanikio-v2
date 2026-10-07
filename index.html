@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VANIKIO — Digital Business Identity Made Simple</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        :root {
+            --bg: #f7f5ff;
+            --surface: #fcfbff;
+
+            --primary: #6c4cf1;
+            --primary-dark: #5938dc;
+            --primary-soft: #ece7ff;
+
+            --secondary: #20b8a6;
+
+            --text: #27243a;
+            --text-soft: #514b60;
+            --muted: #77738a;
+            --muted-light: #9993aa;
+
+            --border: #e6e2f0;
+
+            --success: #168271;
+            --success-soft: #edfbf7;
+
+            --shadow: 0 20px 60px rgba(108, 76, 241, 0.10);
+            --shadow-small: 0 8px 25px rgba(108, 76, 241, 0.08);
+        }
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        button {
+            font-family: inherit;
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            height: 76px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(252, 251, 255, 0.88);
+
+            border-bottom: 1px solid var(--border);
+
+            backdrop-filter: blur(18px);
+        }
+
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+
+        .brand-logo {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--primary-dark)
+            );
+
+            color: white;
+
+            font-size: 21px;
+            font-weight: 800;
+
+            box-shadow:
+                0 8px 20px rgba(108, 76, 241, 0.25);
+        }
+
+
+        .brand-name {
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+
+        .brand-tag {
+            color: var(--muted);
+            font-size: 12px;
+            margin-left: 4px;
+        }
+
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+
+        .nav-link {
+            color: var(--text-soft);
+            font-size: 13px;
+            font-weight: 500;
+
+            padding: 9px 15px;
+
+            border-radius: 10px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .nav-link:hover {
+            background: var(--primary-soft);
+            color: var(--primary);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            max-width: 1280px;
+            margin: auto;
+
+            min-height: 650px;
+
+            padding: 85px 7% 70px;
+
+            display: grid;
+
+            grid-template-columns:
+                1.05fr 0.95fr;
+
+            gap: 70px;
+
+            align-items: center;
+        }
+
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            background: var(--primary-soft);
+
+            border: 1px solid #ddd5ff;
+
+            color: var(--primary);
+
+            font-size: 12px;
+            font-weight: 600;
+
+            margin-bottom: 24px;
+        }
+
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--secondary);
+
+            box-shadow:
+                0 0 0 5px rgba(32, 184, 166, 0.12);
+        }
+
+
+        .hero h1 {
+            font-size: clamp(43px, 5vw, 72px);
+
+            line-height: 1.08;
+
+            letter-spacing: -2.8px;
+
+            font-weight: 800;
+
+            max-width: 720px;
+        }
+
+
+        .hero h1 span {
+            background: linear-gradient(
+                135deg,
+                var(--primary),
+                var(--secondary)
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+
+            color: transparent;
+        }
+
+
+        .hero-description {
+            max-width: 610px;
+
+            margin-top: 25px;
+
+            font-size: 16px;
+
+            line-height: 1.8;
+
+            color: var(--text-soft);
+        }
+
+
+        /* =====================================================
+           HERO ACTION
+        ===================================================== */
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 32px;
+        }
+
+
+        .btn {
+            height: 52px;
+
+            padding: 0 22px;
+
+            border-radius: 13px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 9px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+
+        .btn-primary {
+            background: var(--primary);
+
+            color: white;
+
+            box-shadow:
+                0 12px 25px rgba(108, 76, 241, 0.22);
+        }
+
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+
+            box-shadow:
+                0 16px 30px rgba(108, 76, 241, 0.28);
+        }
+
+
+        .hero-note {
+            margin-top: 17px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           HERO VISUAL
+        ===================================================== */
+
+        .hero-visual {
+            position: relative;
+
+            min-height: 510px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .visual-orb {
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle at 35% 30%,
+                    #ffffff 0,
+                    var(--primary-soft) 45%,
+                    #ddd5ff 100%
+                );
+        }
+
+
+        .visual-orb::after {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -35px;
+            bottom: 15px;
+
+            border-radius: 50%;
+
+            background: var(--secondary);
+
+            opacity: 0.14;
+        }
+
+
+        /* =====================================================
+           BUSINESS CARD
+        ===================================================== */
+
+        .profile-card {
+            position: relative;
+            z-index: 3;
+
+            width: min(390px, 88%);
+
+            padding: 27px;
+
+            background: var(--surface);
+
+            border: 1px solid rgba(230, 226, 240, 0.95);
+
+            border-radius: 28px;
+
+            box-shadow:
+                0 30px 70px rgba(39, 36, 58, 0.14);
+
+            transform: rotate(2deg);
+        }
+
+
+        .profile-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+
+            border-radius: 19px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary-soft),
+                    #ffffff
+                );
+
+            border: 1px solid #ddd5ff;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: var(--primary);
+
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+
+        .profile-name {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+
+        .profile-location {
+            margin-top: 2px;
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        .profile-line {
+            height: 1px;
+
+            background: var(--border);
+
+            margin: 24px 0;
+        }
+
+
+        .profile-heading {
+            font-size: 20px;
+
+            font-weight: 700;
+
+            line-height: 1.3;
+        }
+
+
+        .profile-subtitle {
+            color: var(--text-soft);
+
+            font-size: 12px;
+
+            margin-top: 7px;
+        }
+
+
+        .profile-tags {
+            display: flex;
+
+            gap: 7px;
+
+            flex-wrap: wrap;
+
+            margin-top: 17px;
+        }
+
+
+        .profile-tag {
+            padding: 6px 10px;
+
+            border-radius: 8px;
+
+            background: var(--primary-soft);
+
+            color: var(--primary);
+
+            font-size: 10px;
+
+            font-weight: 600;
+        }
+
+
+        .profile-footer {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-top: 25px;
+        }
+
+
+        .profile-link {
+            font-size: 11px;
+
+            color: var(--primary);
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           QR
+        ===================================================== */
+
+        .qr-box {
+            width: 75px;
+            height: 75px;
+
+            padding: 7px;
+
+            border-radius: 12px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(7, 1fr);
+
+            gap: 2px;
+        }
+
+
+        .qr-box span {
+            border-radius: 1px;
+
+            background: var(--text);
+        }
+
+
+        .qr-box span:nth-child(3n),
+        .qr-box span:nth-child(5n) {
+            background: var(--primary);
+        }
+
+
+        /* =====================================================
+           BUSINESS FLOATING CARD
+        ===================================================== */
+
+        .share-floating {
+            position: absolute;
+
+            z-index: 5;
+
+            right: 1%;
+
+            bottom: 55px;
+
+            width: 180px;
+
+            padding: 15px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            box-shadow:
+                0 20px 45px rgba(39, 36, 58, 0.13);
+
+            transform: rotate(-5deg);
+        }
+
+
+        .share-icon {
+            width: 35px;
+            height: 35px;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--success-soft);
+
+            color: var(--success);
+
+            font-weight: 700;
+        }
+
+
+        .share-title {
+            font-size: 12px;
+
+            font-weight: 700;
+
+            margin-top: 10px;
+        }
+
+
+        .share-text {
+            font-size: 9px;
+
+            color: var(--muted);
+
+            margin-top: 3px;
+        }
+
+
+        .share-status {
+            margin-top: 11px;
+
+            display: inline-block;
+
+            padding: 4px 8px;
+
+            border-radius: 7px;
+
+            background: var(--success-soft);
+
+            color: var(--success);
+
+            font-size: 8px;
+
+            font-weight: 600;
+        }
+
+
+        /* =====================================================
+           DECORATION
+        ===================================================== */
+
+        .decor {
+            position: absolute;
+
+            border-radius: 50%;
+        }
+
+
+        .decor-one {
+            width: 18px;
+            height: 18px;
+
+            top: 65px;
+            right: 17%;
+
+            background: var(--secondary);
+
+            opacity: 0.7;
+        }
+
+
+        .decor-two {
+            width: 10px;
+            height: 10px;
+
+            left: 7%;
+            bottom: 90px;
+
+            background: var(--primary);
+        }
+
+
+        .decor-three {
+            width: 85px;
+            height: 85px;
+
+            right: 4%;
+            top: 100px;
+
+            border: 1px solid #dcd4ff;
+
+            background: transparent;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .section {
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding: 70px 7%;
+        }
+
+
+        .section-header {
+            max-width: 620px;
+
+            margin-bottom: 35px;
+        }
+
+
+        .section-label {
+            color: var(--primary);
+
+            font-size: 11px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 1.3px;
+
+            font-weight: 700;
+
+            margin-bottom: 10px;
+        }
+
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+
+            line-height: 1.2;
+
+            letter-spacing: -1.3px;
+
+            font-weight: 700;
+        }
+
+
+        .section-description {
+            color: var(--text-soft);
+
+            font-size: 14px;
+
+            margin-top: 10px;
+        }
+
+
+        /* =====================================================
+           FEATURES
+        ===================================================== */
+
+        .features {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+        }
+
+
+        .feature {
+            padding: 28px;
+
+            background: var(--surface);
+
+            border: 1px solid var(--border);
+
+            border-radius: 22px;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+
+        .feature:hover {
+            transform: translateY(-5px);
+
+            border-color: #d7cdfd;
+
+            box-shadow: var(--shadow);
+        }
+
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: var(--primary-soft);
+
+            color: var(--primary);
+
+            font-size: 19px;
+
+            margin-bottom: 19px;
+        }
+
+
+        .feature:nth-child(2) .feature-icon {
+            background: var(--success-soft);
+
+            color: var(--success);
+        }
+
+
+        .feature:nth-child(3) .feature-icon {
+            background: #fff4f6;
+
+            color: #d85c6e;
+        }
+
+
+        .feature h3 {
+            font-size: 16px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .feature p {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           BUSINESS PATH
+        ===================================================== */
+
+        .paths {
+            display: grid;
+
+            grid-template-columns: 1fr;
+
+            gap: 20px;
+        }
+
+
+        .path-card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 34px;
+
+            border-radius: 25px;
+
+            border: 1px solid var(--border);
+
+            background: var(--surface);
+
+            box-shadow: var(--shadow-small);
+        }
+
+
+        .path-card.primary-path {
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary-soft),
+                    var(--surface)
+                );
+
+            border-color: #d9d0ff;
+        }
+
+
+        .path-number {
+            font-size: 11px;
+
+            color: var(--muted);
+
+            font-weight: 600;
+        }
+
+
+        .path-card h3 {
+            font-size: 23px;
+
+            line-height: 1.3;
+
+            margin-top: 12px;
+        }
+
+
+        .path-card p {
+            color: var(--text-soft);
+
+            font-size: 12px;
+
+            margin-top: 9px;
+
+            max-width: 650px;
+        }
+
+
+        .path-action {
+            display: inline-flex;
+
+            margin-top: 23px;
+
+            color: var(--primary);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+            align-items: center;
+
+            gap: 7px;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .cta {
+            margin-top: 40px;
+
+            padding: 55px 7%;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .cta::before {
+            content: "";
+
+            position: absolute;
+
+            width: 280px;
+            height: 280px;
+
+            border-radius: 50%;
+
+            right: -80px;
+            top: -130px;
+
+            background:
+                rgba(255,255,255,0.09);
+        }
+
+
+        .cta::after {
+            content: "";
+
+            position: absolute;
+
+            width: 160px;
+            height: 160px;
+
+            border-radius: 50%;
+
+            left: 45%;
+            bottom: -100px;
+
+            background:
+                rgba(32,184,166,0.18);
+        }
+
+
+        .cta-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .cta h2 {
+            font-size: clamp(28px, 4vw, 43px);
+
+            line-height: 1.2;
+
+            letter-spacing: -1px;
+        }
+
+
+        .cta p {
+            max-width: 560px;
+
+            margin-top: 10px;
+
+            font-size: 13px;
+
+            opacity: 0.82;
+        }
+
+
+        .cta .btn {
+            margin-top: 25px;
+
+            background: white;
+
+            color: var(--primary);
+
+            box-shadow: none;
+        }
+
+
+        .cta .btn:hover {
+            background: var(--primary-soft);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding: 35px 7% 45px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-top: 1px solid var(--border);
+
+            color: var(--muted);
+
+            font-size: 11px;
+        }
+
+
+        .footer-brand {
+            font-weight: 700;
+
+            color: var(--text);
+        }
+
+
+        .footer-links {
+            display: flex;
+
+            gap: 18px;
+        }
+
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+
+                padding-top: 60px;
+
+                gap: 20px;
+            }
+
+
+            .hero-content {
+                text-align: center;
+            }
+
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+
+            .hero-note {
+                text-align: center;
+            }
+
+
+            .hero-visual {
+                min-height: 470px;
+            }
+
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 620px) {
+
+            .navbar {
+                height: 68px;
+
+                padding: 0 5%;
+            }
+
+
+            .brand-tag,
+            .nav-right .nav-link {
+                display: none;
+            }
+
+
+            .hero {
+                padding: 55px 5% 40px;
+            }
+
+
+            .hero h1 {
+                letter-spacing: -1.8px;
+            }
+
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+
+            .hero-actions {
+                flex-direction: column;
+            }
+
+
+            .btn {
+                width: 100%;
+            }
+
+
+            .hero-visual {
+                min-height: 400px;
+            }
+
+
+            .profile-card {
+                width: 92%;
+
+                padding: 22px;
+            }
+
+
+            .share-floating {
+                right: 0;
+
+                bottom: 25px;
+
+                width: 155px;
+            }
+
+
+            .visual-orb {
+                width: 270px;
+                height: 270px;
+            }
+
+
+            .section {
+                padding: 55px 5%;
+            }
+
+
+            .path-card {
+                padding: 27px;
+            }
+
+
+            .cta {
+                margin-top: 25px;
+
+                padding: 40px 7%;
+
+                border-radius: 24px;
+            }
+
+
+            footer {
+                padding-left: 5%;
+                padding-right: 5%;
+
+                flex-direction: column;
+
+                gap: 15px;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ===================================================== -->
+
+    <nav class="navbar">
+
+        <a href="#" class="brand">
+
+            <div class="brand-logo">
+                V
+            </div>
+
+            <div class="brand-name">
+                VANIKIO
+            </div>
+
+            <span class="brand-tag">
+                Digital business identity made simple
+            </span>
+
+        </a>
+
+
+        <div class="nav-right">
+
+            <a href="#features" class="nav-link">
+                Features
+            </a>
+
+            <a href="#paths" class="nav-link">
+                How it works
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
+    <main>
+
+        <section class="hero">
+
+
+            <div class="hero-content">
+
+
+                <div class="hero-badge">
+
+                    <span class="badge-dot"></span>
+
+                    Simple business presence
+
+                </div>
+
+
+                <h1>
+
+                    Make your business
+                    <span>easy to discover.</span>
+
+                    Keep everything
+                    <span>in one place.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    VANIKIO gives your business a simple digital identity
+                    where customers can discover your services, portfolio,
+                    contact information, social links and more — all from
+                    one place.
+
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <a
+                        href="publish-buisness.html"
+                        class="btn btn-primary"
+                    >
+
+                        Publish Business
+
+                        <span>→</span>
+
+                    </a>
+
+                </div>
+
+
+                <p class="hero-note">
+
+                    Create your business presence · Share it anywhere
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 HERO VISUAL
+            ================================================= -->
+
+            <div class="hero-visual">
+
+                <div class="visual-orb"></div>
+
+                <div class="decor decor-one"></div>
+
+                <div class="decor decor-two"></div>
+
+                <div class="decor decor-three"></div>
+
+
+                <div class="profile-card">
+
+
+                    <div class="profile-top">
+
+                        <div class="profile-avatar">
+                            K
+                        </div>
+
+
+                        <div>
+
+                            <div class="profile-name">
+                                Kumar Studio
+                            </div>
+
+                            <div class="profile-location">
+                                Madurai, Tamil Nadu
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-line"></div>
+
+
+                    <div class="profile-heading">
+
+                        Creative work.
+                        Beautifully presented.
+
+                    </div>
+
+
+                    <div class="profile-subtitle">
+
+                        Photography · Design · Digital Portfolio
+
+                    </div>
+
+
+                    <div class="profile-tags">
+
+                        <span class="profile-tag">
+                            Portfolio
+                        </span>
+
+                        <span class="profile-tag">
+                            Services
+                        </span>
+
+                        <span class="profile-tag">
+                            Contact
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-footer">
+
+                        <div class="profile-link">
+                            vanikio business →
+                        </div>
+
+
+                        <div class="qr-box">
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="share-floating">
+
+                    <div class="share-icon">
+                        ↗
+                    </div>
+
+                    <div class="share-title">
+                        Business Profile
+                    </div>
+
+                    <div class="share-text">
+
+                        One simple link for your
+                        customers to discover.
+
+                    </div>
+
+                    <span class="share-status">
+
+                        Ready to share
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FEATURES
+        ===================================================== -->
+
+        <section class="section" id="features">
+
+
+            <div class="section-header">
+
+                <div class="section-label">
+                    VANIKIO
+                </div>
+
+                <h2 class="section-title">
+
+                    Everything your business needs
+                    in one simple place.
+
+                </h2>
+
+                <p class="section-description">
+
+                    Give customers one place to discover what
+                    you do, what you offer and how to contact you.
+
+                </p>
+
+            </div>
+
+
+            <div class="features">
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ↗
+                    </div>
+
+                    <h3>
+                        Business Profile
+                    </h3>
+
+                    <p>
+
+                        Create a simple digital presence for your
+                        business with your name, description,
+                        services and important information.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        #
+                    </div>
+
+                    <h3>
+                        QR Ready
+                    </h3>
+
+                    <p>
+
+                        Turn your business page into a QR experience
+                        that customers can open directly from their phone.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="feature">
+
+                    <div class="feature-icon">
+                        ✦
+                    </div>
+
+                    <h3>
+                        Share Everywhere
+                    </h3>
+
+                    <p>
+
+                        Share your business through WhatsApp,
+                        social media, printed cards, stickers,
+                        posters or anywhere else.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             BUSINESS PATH
+        ===================================================== -->
+
+        <section class="section" id="paths">
+
+
+            <div class="section-header">
+
+                <div class="section-label">
+                    How it works
+                </div>
+
+                <h2 class="section-title">
+
+                    Create your business presence
+                    in a few simple steps.
+
+                </h2>
+
+            </div>
+
+
+
+            <div class="paths">
+
+
+                <div class="path-card primary-path">
+
+                    <div class="path-number">
+                        01 · BUSINESS
+                    </div>
+
+                    <h3>
+                        Publish your business.
+                    </h3>
+
+                    <p>
+
+                        Add your business name, description,
+                        services, portfolio, contact details,
+                        social links and other information that
+                        helps customers understand your business.
+
+                    </p>
+
+
+                    <a
+                        href="publish-buisness.html"
+                        class="path-action"
+                    >
+
+                        Publish Business
+
+                        →
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CTA
+            ================================================= -->
+
+            <div class="cta">
+
+                <div class="cta-content">
+
+                    <h2>
+
+                        Your business.
+                        Your identity.
+                        One simple place.
+
+                    </h2>
+
+                    <p>
+
+                        Create a digital business presence that
+                        you can share with customers anywhere.
+
+                    </p>
+
+
+                    <a
+                        href="publish-buisness.html"
+                        class="btn"
+                    >
+
+                        Publish Business
+
+                        →
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer>
+
+        <div>
+
+            © 2026
+
+            <span class="footer-brand">
+                VANIKIO
+            </span>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="publish-buisness.html">
+                Publish Business
+            </a>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

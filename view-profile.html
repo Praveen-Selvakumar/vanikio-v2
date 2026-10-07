@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VANIKIO — Business Profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7f6;
+            color: #222;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .cover {
+            height: 180px;
+            background: linear-gradient(135deg, #075e54, #128c7e);
+        }
+
+        .profile-content {
+            padding: 0 24px 30px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            margin-top: -50px;
+            background: white;
+        }
+
+        .business-name {
+            font-size: 25px;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+
+        .category {
+            color: #777;
+            margin-top: 4px;
+        }
+
+        .description {
+            margin-top: 20px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .info {
+            margin-top: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .info-label {
+            font-weight: 600;
+            min-width: 90px;
+        }
+
+        .info-value {
+            color: #555;
+            word-break: break-word;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+        }
+
+        .call-btn {
+            background: #075e54;
+            color: white;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+        }
+
+        .loading,
+        .error {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .error {
+            color: #d32f2f;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="loading" class="loading">
+        Loading business profile...
+    </div>
+
+    <div id="error" class="error" style="display:none;">
+        Business profile not found.
+    </div>
+
+    <div id="profile" class="profile-card" style="display:none;">
+
+        <div class="cover"></div>
+
+        <div class="profile-content">
+
+            <img
+                id="businessLogo"
+                class="logo"
+                src=""
+                alt="Business Logo"
+            >
+
+            <h1 id="businessName" class="business-name"></h1>
+
+            <p id="category" class="category"></p>
+
+            <p id="description" class="description"></p>
+
+            <div class="info">
+
+                <div class="info-item">
+                    <span class="info-label">📍 Address</span>
+                    <span id="address" class="info-value"></span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">📞 Phone</span>
+                    <span id="phone" class="info-value"></span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">✉️ Email</span>
+                    <span id="email" class="info-value"></span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">🌐 Website</span>
+                    <span id="website" class="info-value"></span>
+                </div>
+
+            </div>
+
+            <div class="actions">
+
+                <a
+                    id="callButton"
+                    class="btn call-btn"
+                    href="#"
+                >
+                    Call
+                </a>
+
+                <a
+                    id="whatsappButton"
+                    class="btn whatsapp-btn"
+                    href="#"
+                    target="_blank"
+                >
+                    WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script type="module">
+
+    import {
+        initializeApp
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+
+    import {
+        getFirestore,
+        doc,
+        getDoc
+    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_PROJECT.firebaseapp.com",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_PROJECT.appspot.com",
+        messagingSenderId: "YOUR_SENDER_ID",
+        appId: "YOUR_APP_ID"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+
+    // ---------------------------------------
+    // Get business ID from QR URL
+    // ---------------------------------------
+
+    const params = new URLSearchParams(window.location.search);
+
+    const businessId = params.get("id");
+
+
+    // ---------------------------------------
+    // Validate ID
+    // ---------------------------------------
+
+    if (!businessId) {
+
+        showError();
+
+    } else {
+
+        loadBusinessProfile(businessId);
+
+    }
+
+
+    // ---------------------------------------
+    // Load business
+    // ---------------------------------------
+
+    async function loadBusinessProfile(id) {
+
+        try {
+
+            const businessRef = doc(
+                db,
+                "businesses",
+                id
+            );
+
+            const businessSnapshot =
+                await getDoc(businessRef);
+
+
+            if (!businessSnapshot.exists()) {
+
+                showError();
+                return;
+
+            }
+
+
+            const business =
+                businessSnapshot.data();
+
+
+            // ---------------------------------------
+            // Display data
+            // ---------------------------------------
+
+            document.getElementById("businessName")
+                .textContent =
+                business.businessName || "Business";
+
+
+            document.getElementById("category")
+                .textContent =
+                business.category || "";
+
+
+            document.getElementById("description")
+                .textContent =
+                business.description || "";
+
+
+            document.getElementById("address")
+                .textContent =
+                business.address || "Not available";
+
+
+            document.getElementById("phone")
+                .textContent =
+                business.phone || "Not available";
+
+
+            document.getElementById("email")
+                .textContent =
+                business.email || "Not available";
+
+
+            document.getElementById("website")
+                .textContent =
+                business.website || "Not available";
+
+
+            // Logo
+
+            const logo =
+                document.getElementById("businessLogo");
+
+            if (business.logoUrl) {
+
+                logo.src = business.logoUrl;
+
+            } else {
+
+                logo.src = "https://via.placeholder.com/100";
+
+            }
+
+
+            // Call button
+
+            if (business.phone) {
+
+                document.getElementById("callButton")
+                    .href =
+                    `tel:${business.phone}`;
+
+            }
+
+
+            // WhatsApp
+
+            if (business.phone) {
+
+                const cleanPhone =
+                    business.phone.replace(/\D/g, "");
+
+                document.getElementById("whatsappButton")
+                    .href =
+                    `https://wa.me/${cleanPhone}`;
+
+            }
+
+
+            // ---------------------------------------
+            // Show profile
+            // ---------------------------------------
+
+            document.getElementById("loading")
+                .style.display = "none";
+
+            document.getElementById("profile")
+                .style.display = "block";
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            showError();
+
+        }
+
+    }
+
+
+    function showError() {
+
+        document.getElementById("loading")
+            .style.display = "none";
+
+        document.getElementById("error")
+            .style.display = "block";
+
+    }
+
+</script>
+
+</body>
+
+</html>
