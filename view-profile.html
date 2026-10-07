@@ -7,13 +7,6 @@
 
     <title>VANIKIO — Business Profile</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
     <style>
         * {
             box-sizing: border-box;
@@ -22,397 +15,1038 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #f5f7f6;
-            color: #222;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: auto;
+            font-family: Arial, sans-serif;
+            background: #f4f6f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
         .profile-card {
-            background: white;
-            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            background: #ffffff;
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
         }
 
         .cover {
-            height: 180px;
-            background: linear-gradient(135deg, #075e54, #128c7e);
+            height: 150px;
+            background: linear-gradient(135deg, #05523D, #087856);
+            position: relative;
         }
 
-        .profile-content {
-            padding: 0 24px 30px;
-        }
-
-        .logo {
+        .logo-container {
+            position: absolute;
+            left: 50%;
+            bottom: -50px;
+            transform: translateX(-50%);
             width: 100px;
             height: 100px;
             border-radius: 50%;
+            background: #ffffff;
+            padding: 5px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
             object-fit: cover;
-            border: 5px solid white;
-            margin-top: -50px;
-            background: white;
+        }
+
+        .profile-content {
+            padding: 65px 30px 30px;
+            text-align: center;
         }
 
         .business-name {
-            font-size: 25px;
+            font-size: 28px;
             font-weight: 700;
-            margin-top: 15px;
+            color: #05523D;
+            margin-bottom: 8px;
         }
 
         .category {
-            color: #777;
-            margin-top: 4px;
+            display: inline-block;
+            background: #e7f5ef;
+            color: #05523D;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
         }
 
         .description {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .info-section {
+            text-align: left;
             margin-top: 20px;
-            line-height: 1.7;
-            color: #555;
         }
 
-        .info {
-            margin-top: 25px;
-        }
-
-        .info-item {
+        .info-row {
             display: flex;
+            align-items: flex-start;
             gap: 12px;
-            padding: 14px 0;
-            border-bottom: 1px solid #eee;
+            padding: 13px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-icon {
+            width: 24px;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .info-content {
+            flex: 1;
         }
 
         .info-label {
-            font-weight: 600;
-            min-width: 90px;
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 3px;
         }
 
         .info-value {
-            color: #555;
+            font-size: 15px;
+            color: #333;
             word-break: break-word;
         }
 
-        .actions {
+        .info-value a {
+            color: #05523D;
+            text-decoration: none;
+        }
+
+        .info-value a:hover {
+            text-decoration: underline;
+        }
+
+        .list-section {
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        .section-title {
+            color: #05523D;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .list-item {
+            background: #f7faf8;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .social-link {
+            display: inline-block;
+            padding: 8px 14px;
+            background: #e7f5ef;
+            color: #05523D;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .social-link:hover {
+            background: #d5eee3;
+        }
+
+        .action-buttons {
             display: flex;
             gap: 12px;
             margin-top: 25px;
         }
 
-        .btn {
+        .action-button {
             flex: 1;
             padding: 14px;
-            border-radius: 12px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: 600;
             border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            text-align: center;
             cursor: pointer;
         }
 
-        .call-btn {
-            background: #075e54;
+        .call-button {
+            background: #05523D;
             color: white;
         }
 
-        .whatsapp-btn {
-            background: #25d366;
+        .whatsapp-button {
+            background: #25D366;
             color: white;
         }
 
-        .loading,
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e0e0e0;
+            border-top: 4px solid #05523D;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         .error {
             text-align: center;
-            padding: 80px 20px;
+            padding: 60px 20px;
+            color: #d32f2f;
         }
 
-        .error {
-            color: #d32f2f;
+        .error h2 {
+            margin-bottom: 10px;
+        }
+
+        .error p {
+            color: #666;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+
+            .profile-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .business-name {
+                font-size: 24px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="profile-card">
 
-    <div id="loading" class="loading">
-        Loading business profile...
-    </div>
+        <!-- Loading -->
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading business profile...</p>
+        </div>
 
-    <div id="error" class="error" style="display:none;">
-        Business profile not found.
-    </div>
+        <!-- Error -->
+        <div id="error" class="error" style="display:none;">
+            <h2>Business Not Found</h2>
+            <p>We couldn't find this business profile.</p>
+        </div>
 
-    <div id="profile" class="profile-card" style="display:none;">
+        <!-- Profile -->
+        <div id="profile" style="display:none;">
 
-        <div class="cover"></div>
+            <div class="cover">
+                <div class="logo-container">
+                    <img id="businessLogo"
+                         class="logo"
+                         src="https://via.placeholder.com/100"
+                         alt="Business Logo">
+                </div>
+            </div>
 
-        <div class="profile-content">
+            <div class="profile-content">
 
-            <img
-                id="businessLogo"
-                class="logo"
-                src=""
-                alt="Business Logo"
-            >
+                <h1 id="businessName" class="business-name">
+                    Business
+                </h1>
 
-            <h1 id="businessName" class="business-name"></h1>
-
-            <p id="category" class="category"></p>
-
-            <p id="description" class="description"></p>
-
-            <div class="info">
-
-                <div class="info-item">
-                    <span class="info-label">📍 Address</span>
-                    <span id="address" class="info-value"></span>
+                <div id="category" class="category">
+                    Business
                 </div>
 
-                <div class="info-item">
-                    <span class="info-label">📞 Phone</span>
-                    <span id="phone" class="info-value"></span>
+                <p id="description" class="description">
+                </p>
+
+                <!-- Business Information -->
+                <div class="info-section">
+
+                    <div class="info-row">
+                        <div class="info-icon">📍</div>
+
+                        <div class="info-content">
+                            <div class="info-label">Location</div>
+                            <div id="address" class="info-value">
+                                Not available
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">📞</div>
+
+                        <div class="info-content">
+                            <div class="info-label">Phone</div>
+                            <div id="phone" class="info-value">
+                                Not available
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">✉️</div>
+
+                        <div class="info-content">
+                            <div class="info-label">Email</div>
+                            <div id="email" class="info-value">
+                                Not available
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <div class="info-icon">🌐</div>
+
+                        <div class="info-content">
+                            <div class="info-label">Website</div>
+                            <div id="website" class="info-value">
+                                Not available
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="info-item">
-                    <span class="info-label">✉️ Email</span>
-                    <span id="email" class="info-value"></span>
+                <!-- Services -->
+                <div id="servicesSection" class="list-section" style="display:none;">
+
+                    <div class="section-title">
+                        Services
+                    </div>
+
+                    <div id="servicesList"></div>
+
                 </div>
 
-                <div class="info-item">
-                    <span class="info-label">🌐 Website</span>
-                    <span id="website" class="info-value"></span>
+                <!-- Products -->
+                <div id="productsSection" class="list-section" style="display:none;">
+
+                    <div class="section-title">
+                        Products
+                    </div>
+
+                    <div id="productsList"></div>
+
+                </div>
+
+                <!-- Social Links -->
+                <div id="socialSection" class="list-section" style="display:none;">
+
+                    <div class="section-title">
+                        Social Links
+                    </div>
+
+                    <div id="socialLinks" class="social-links"></div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+
+                    <a id="callButton"
+                       class="action-button call-button"
+                       href="#">
+                        📞 Call
+                    </a>
+
+                    <a id="whatsappButton"
+                       class="action-button whatsapp-button"
+                       href="#"
+                       target="_blank">
+                        💬 WhatsApp
+                    </a>
+
                 </div>
 
             </div>
-
-            <div class="actions">
-
-                <a
-                    id="callButton"
-                    class="btn call-btn"
-                    href="#"
-                >
-                    Call
-                </a>
-
-                <a
-                    id="whatsappButton"
-                    class="btn whatsapp-btn"
-                    href="#"
-                    target="_blank"
-                >
-                    WhatsApp
-                </a>
-
-            </div>
-
         </div>
 
     </div>
 
-</div>
 
-<script type="module">
+    <!-- Firebase -->
+    <script type="module">
 
-    import {
-        initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { initializeApp }
+            from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
-    import {
-        getFirestore,
-        doc,
-        getDoc
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-
-
-    // Your Firebase configuration
-    const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "YOUR_PROJECT.firebaseapp.com",
-        projectId: "YOUR_PROJECT_ID",
-        storageBucket: "YOUR_PROJECT.appspot.com",
-        messagingSenderId: "YOUR_SENDER_ID",
-        appId: "YOUR_APP_ID"
-    };
+        import {
+            getFirestore,
+            doc,
+            getDoc
+        } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+        // =========================================================
+        // SAME FIREBASE CONFIG AS publish-buisness.html
+        // =========================================================
+
+        const firebaseConfig = {
+
+            apiKey: "AIzaSyDQp3SzKyJRSW4iAKgtVRATLkdm55y4JHQ",
+
+            authDomain: "tabletap-3c1b9.firebaseapp.com",
+
+            projectId: "tabletap-3c1b9",
+
+            storageBucket: "tabletap-3c1b9.firebasestorage.app",
+
+            messagingSenderId: "17540244686",
+
+            appId: "1:17540244686:web:993d4136b661d5bbe3dc9f",
+
+            measurementId: "G-L88D3WK9LW"
+
+        };
 
 
-    // ---------------------------------------
-    // Get business ID from QR URL
-    // ---------------------------------------
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
 
-    const params = new URLSearchParams(window.location.search);
-
-    const businessId = params.get("id");
+        const db = getFirestore(app);
 
 
-    // ---------------------------------------
-    // Validate ID
-    // ---------------------------------------
+        // =========================================================
+        // GET BUSINESS ID FROM URL
+        // =========================================================
 
-    if (!businessId) {
+        const params = new URLSearchParams(window.location.search);
 
-        showError();
-
-    } else {
-
-        loadBusinessProfile(businessId);
-
-    }
+        const businessId = params.get("id");
 
 
-    // ---------------------------------------
-    // Load business
-    // ---------------------------------------
+        // =========================================================
+        // LOAD BUSINESS
+        // =========================================================
 
-    async function loadBusinessProfile(id) {
+        if (!businessId) {
 
-        try {
+            showError();
 
-            const businessRef = doc(
-                db,
-                "businesses",
-                id
-            );
+        } else {
 
-            const businessSnapshot =
-                await getDoc(businessRef);
+            loadBusinessProfile(businessId);
+
+        }
 
 
-            if (!businessSnapshot.exists()) {
+        // =========================================================
+        // FIRESTORE
+        // =========================================================
+
+        async function loadBusinessProfile(id) {
+
+            try {
+
+                const businessRef = doc(
+                    db,
+                    "businesses",
+                    id
+                );
+
+                const businessSnapshot =
+                    await getDoc(businessRef);
+
+
+                // Business doesn't exist
+                if (!businessSnapshot.exists()) {
+
+                    showError();
+
+                    return;
+
+                }
+
+
+                const business =
+                    businessSnapshot.data();
+
+
+                // =================================================
+                // BUSINESS NAME
+                // publish-buisness.html saves: name
+                // =================================================
+
+                document.getElementById("businessName")
+                    .textContent =
+                    business.name || "Business";
+
+
+                // =================================================
+                // CATEGORY
+                // =================================================
+
+                document.getElementById("category")
+                    .textContent =
+                    business.category || "Business";
+
+
+                // =================================================
+                // ABOUT
+                // publish-buisness.html saves: about
+                // =================================================
+
+                document.getElementById("description")
+                    .textContent =
+                    business.about ||
+                    "No description available.";
+
+
+                // =================================================
+                // LOCATION
+                // publish-buisness.html saves: location
+                // =================================================
+
+                document.getElementById("address")
+                    .textContent =
+                    business.location ||
+                    "Not available";
+
+
+                // =================================================
+                // PHONE
+                // =================================================
+
+                const phoneElement =
+                    document.getElementById("phone");
+
+                if (business.phone) {
+
+                    const phoneLink =
+                        document.createElement("a");
+
+                    phoneLink.href =
+                        `tel:${business.phone}`;
+
+                    phoneLink.textContent =
+                        business.phone;
+
+                    phoneElement.innerHTML = "";
+
+                    phoneElement.appendChild(phoneLink);
+
+                } else {
+
+                    phoneElement.textContent =
+                        "Not available";
+
+                }
+
+
+                // =================================================
+                // EMAIL
+                // =================================================
+
+                const emailElement =
+                    document.getElementById("email");
+
+                if (business.email) {
+
+                    const emailLink =
+                        document.createElement("a");
+
+                    emailLink.href =
+                        `mailto:${business.email}`;
+
+                    emailLink.textContent =
+                        business.email;
+
+                    emailElement.innerHTML = "";
+
+                    emailElement.appendChild(emailLink);
+
+                } else {
+
+                    emailElement.textContent =
+                        "Not available";
+
+                }
+
+
+                // =================================================
+                // WEBSITE
+                // =================================================
+
+                const websiteElement =
+                    document.getElementById("website");
+
+                if (business.website) {
+
+                    let websiteUrl =
+                        business.website.trim();
+
+                    if (
+                        !websiteUrl.startsWith("http://") &&
+                        !websiteUrl.startsWith("https://")
+                    ) {
+
+                        websiteUrl =
+                            "https://" + websiteUrl;
+
+                    }
+
+                    const websiteLink =
+                        document.createElement("a");
+
+                    websiteLink.href =
+                        websiteUrl;
+
+                    websiteLink.target =
+                        "_blank";
+
+                    websiteLink.rel =
+                        "noopener noreferrer";
+
+                    websiteLink.textContent =
+                        business.website;
+
+                    websiteElement.innerHTML = "";
+
+                    websiteElement.appendChild(
+                        websiteLink
+                    );
+
+                } else {
+
+                    websiteElement.textContent =
+                        "Not available";
+
+                }
+
+
+                // =================================================
+                // LOGO
+                //
+                // publish-buisness.html currently does NOT save
+                // logoUrl, so use placeholder.
+                // =================================================
+
+                const logo =
+                    document.getElementById("businessLogo");
+
+                if (business.logoUrl) {
+
+                    logo.src =
+                        business.logoUrl;
+
+                } else {
+
+                    logo.src =
+                        "https://via.placeholder.com/100";
+
+                }
+
+
+                // =================================================
+                // SERVICES
+                //
+                // publish-buisness.html saves:
+                // services: [...services]
+                // =================================================
+
+                displayList(
+                    business.services,
+                    "servicesSection",
+                    "servicesList"
+                );
+
+
+                // =================================================
+                // PRODUCTS
+                //
+                // publish-buisness.html saves:
+                // products: [...products]
+                // =================================================
+
+                displayList(
+                    business.products,
+                    "productsSection",
+                    "productsList"
+                );
+
+
+                // =================================================
+                // SOCIAL LINKS
+                //
+                // publish-buisness.html saves:
+                // socialLinks: [...socialLinks]
+                // =================================================
+
+                displaySocialLinks(
+                    business.socialLinks
+                );
+
+
+                // =================================================
+                // CALL BUTTON
+                // =================================================
+
+                const callButton =
+                    document.getElementById(
+                        "callButton"
+                    );
+
+                if (business.phone) {
+
+                    callButton.href =
+                        `tel:${business.phone}`;
+
+                } else {
+
+                    callButton.style.display =
+                        "none";
+
+                }
+
+
+                // =================================================
+                // WHATSAPP BUTTON
+                //
+                // Prefer whatsapp number.
+                // If unavailable, use phone.
+                // =================================================
+
+                const whatsappButton =
+                    document.getElementById(
+                        "whatsappButton"
+                    );
+
+                const whatsappNumber =
+                    business.whatsapp ||
+                    business.phone;
+
+
+                if (whatsappNumber) {
+
+                    const cleanNumber =
+                        whatsappNumber.replace(
+                            /\D/g,
+                            ""
+                        );
+
+                    whatsappButton.href =
+                        `https://wa.me/${cleanNumber}`;
+
+                } else {
+
+                    whatsappButton.style.display =
+                        "none";
+
+                }
+
+
+                // =================================================
+                // SHOW PROFILE
+                // =================================================
+
+                document.getElementById(
+                    "loading"
+                ).style.display = "none";
+
+
+                document.getElementById(
+                    "profile"
+                ).style.display = "block";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Error loading business:",
+                    error
+                );
 
                 showError();
+
+            }
+
+        }
+
+
+        // =========================================================
+        // DISPLAY SERVICES / PRODUCTS
+        // =========================================================
+
+        function displayList(
+            items,
+            sectionId,
+            listId
+        ) {
+
+            const section =
+                document.getElementById(sectionId);
+
+            const list =
+                document.getElementById(listId);
+
+
+            if (
+                !items ||
+                !Array.isArray(items) ||
+                items.length === 0
+            ) {
+
+                section.style.display =
+                    "none";
+
                 return;
 
             }
 
 
-            const business =
-                businessSnapshot.data();
+            list.innerHTML = "";
 
 
-            // ---------------------------------------
-            // Display data
-            // ---------------------------------------
+            items.forEach(function(item) {
 
-            document.getElementById("businessName")
-                .textContent =
-                business.businessName || "Business";
+                const div =
+                    document.createElement("div");
 
+                div.className =
+                    "list-item";
 
-            document.getElementById("category")
-                .textContent =
-                business.category || "";
+                div.textContent =
+                    item;
 
+                list.appendChild(div);
 
-            document.getElementById("description")
-                .textContent =
-                business.description || "";
+            });
 
 
-            document.getElementById("address")
-                .textContent =
-                business.address || "Not available";
-
-
-            document.getElementById("phone")
-                .textContent =
-                business.phone || "Not available";
-
-
-            document.getElementById("email")
-                .textContent =
-                business.email || "Not available";
-
-
-            document.getElementById("website")
-                .textContent =
-                business.website || "Not available";
-
-
-            // Logo
-
-            const logo =
-                document.getElementById("businessLogo");
-
-            if (business.logoUrl) {
-
-                logo.src = business.logoUrl;
-
-            } else {
-
-                logo.src = "https://via.placeholder.com/100";
-
-            }
-
-
-            // Call button
-
-            if (business.phone) {
-
-                document.getElementById("callButton")
-                    .href =
-                    `tel:${business.phone}`;
-
-            }
-
-
-            // WhatsApp
-
-            if (business.phone) {
-
-                const cleanPhone =
-                    business.phone.replace(/\D/g, "");
-
-                document.getElementById("whatsappButton")
-                    .href =
-                    `https://wa.me/${cleanPhone}`;
-
-            }
-
-
-            // ---------------------------------------
-            // Show profile
-            // ---------------------------------------
-
-            document.getElementById("loading")
-                .style.display = "none";
-
-            document.getElementById("profile")
-                .style.display = "block";
-
-
-        } catch (error) {
-
-            console.error(error);
-
-            showError();
+            section.style.display =
+                "block";
 
         }
 
-    }
+
+        // =========================================================
+        // DISPLAY SOCIAL LINKS
+        // =========================================================
+
+        function displaySocialLinks(
+            links
+        ) {
+
+            const section =
+                document.getElementById(
+                    "socialSection"
+                );
+
+            const container =
+                document.getElementById(
+                    "socialLinks"
+                );
 
 
-    function showError() {
+            if (
+                !links ||
+                !Array.isArray(links) ||
+                links.length === 0
+            ) {
 
-        document.getElementById("loading")
-            .style.display = "none";
+                section.style.display =
+                    "none";
 
-        document.getElementById("error")
-            .style.display = "block";
+                return;
 
-    }
+            }
 
-</script>
+
+            container.innerHTML = "";
+
+
+            links.forEach(function(link) {
+
+                if (!link) {
+                    return;
+                }
+
+
+                let url =
+                    String(link).trim();
+
+
+                if (
+                    !url.startsWith("http://") &&
+                    !url.startsWith("https://")
+                ) {
+
+                    url =
+                        "https://" + url;
+
+                }
+
+
+                const anchor =
+                    document.createElement("a");
+
+                anchor.className =
+                    "social-link";
+
+                anchor.href =
+                    url;
+
+                anchor.target =
+                    "_blank";
+
+                anchor.rel =
+                    "noopener noreferrer";
+
+                anchor.textContent =
+                    getSocialName(url);
+
+
+                container.appendChild(
+                    anchor
+                );
+
+            });
+
+
+            if (container.children.length > 0) {
+
+                section.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        // =========================================================
+        // SOCIAL NAME
+        // =========================================================
+
+        function getSocialName(url) {
+
+            try {
+
+                const hostname =
+                    new URL(url).hostname
+                        .replace("www.", "");
+
+
+                if (
+                    hostname.includes("facebook")
+                ) {
+                    return "Facebook";
+                }
+
+
+                if (
+                    hostname.includes("instagram")
+                ) {
+                    return "Instagram";
+                }
+
+
+                if (
+                    hostname.includes("youtube")
+                ) {
+                    return "YouTube";
+                }
+
+
+                if (
+                    hostname.includes("linkedin")
+                ) {
+                    return "LinkedIn";
+                }
+
+
+                if (
+                    hostname.includes("twitter") ||
+                    hostname.includes("x.com")
+                ) {
+                    return "X";
+                }
+
+
+                return hostname;
+
+            } catch (error) {
+
+                return "Social Link";
+
+            }
+
+        }
+
+
+        // =========================================================
+        // ERROR
+        // =========================================================
+
+        function showError() {
+
+            document.getElementById(
+                "loading"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "profile"
+            ).style.display = "none";
+
+
+            document.getElementById(
+                "error"
+            ).style.display = "block";
+
+        }
+
+    </script>
 
 </body>
 
