@@ -6,722 +6,722 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<title>VANIKIO — Business Profile</title>
+    
+    <title>VANIKIO — Business Profile</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-    rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+            rel="stylesheet">
 
-<!-- QR Code Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-<style>
+    <style>
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    :root {
-        --primary: #075e54;
-        --primary-dark: #043f39;
-        --secondary: #128c7e;
-        --green-light: #e8f5f2;
-        --text: #17201e;
-        --muted: #71807c;
-        --border: #e7ecea;
-        --white: #ffffff;
-        --background: #f4f7f6;
-    }
-
-    body {
-        font-family: "DM Sans", sans-serif;
-        background:
-            radial-gradient(
-                circle at top left,
-                rgba(18, 140, 126, 0.10),
-                transparent 35%
-            ),
-            radial-gradient(
-                circle at bottom right,
-                rgba(7, 94, 84, 0.08),
-                transparent 35%
-            ),
-            var(--background);
-
-        color: var(--text);
-        min-height: 100vh;
-    }
-
-
-    /* ---------------------------------------
-       Main Container
-    --------------------------------------- */
-
-    .container {
-        width: 100%;
-        max-width: 760px;
-        margin: auto;
-        padding: 30px 18px 50px;
-    }
-
-
-    /* ---------------------------------------
-       Loading
-    --------------------------------------- */
-
-    .loading {
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 14px;
-        color: var(--muted);
-    }
-
-    .loader {
-        width: 42px;
-        height: 42px;
-        border: 4px solid #dce9e6;
-        border-top-color: var(--primary);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-        to {
-            transform: rotate(360deg);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    }
-
-
-    /* ---------------------------------------
-       Error
-    --------------------------------------- */
-
-    .error {
-        max-width: 500px;
-        margin: 100px auto;
-        text-align: center;
-        background: white;
-        border-radius: 24px;
-        padding: 45px 25px;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07);
-    }
-
-    .error-icon {
-        width: 60px;
-        height: 60px;
-        margin: 0 auto 18px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: #fff0f0;
-        color: #d32f2f;
-        font-size: 25px;
-    }
-
-    .error h2 {
-        margin-bottom: 8px;
-    }
-
-    .error p {
-        color: var(--muted);
-        line-height: 1.6;
-    }
-
-
-    /* ---------------------------------------
-       Profile
-    --------------------------------------- */
-
-    .profile-card {
-        background: rgba(255, 255, 255, 0.94);
-        border: 1px solid rgba(255, 255, 255, 0.8);
-        border-radius: 30px;
-        overflow: hidden;
-        box-shadow:
-            0 30px 80px rgba(25, 65, 58, 0.12),
-            0 5px 20px rgba(0, 0, 0, 0.04);
-    }
-
-
-    /* ---------------------------------------
-       Hero
-    --------------------------------------- */
-
-    .hero {
-        height: 230px;
-        position: relative;
-        overflow: hidden;
-
-        background:
-            radial-gradient(
-                circle at 15% 20%,
-                rgba(255, 255, 255, 0.20),
-                transparent 25%
-            ),
-            radial-gradient(
-                circle at 85% 80%,
-                rgba(255, 255, 255, 0.12),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #064c44,
-                #08766a 50%,
-                #12a08e
-            );
-    }
-
-    .hero::before {
-        content: "";
-        position: absolute;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.12);
-        top: -150px;
-        right: -60px;
-    }
-
-    .hero::after {
-        content: "";
-        position: absolute;
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        border: 1px solid rgba(255,255,255,0.10);
-        bottom: -130px;
-        left: -70px;
-    }
-
-
-    /* ---------------------------------------
-       VANIKIO Badge
-    --------------------------------------- */
-
-    .vanikio-badge {
-        position: absolute;
-        top: 22px;
-        left: 22px;
-
-        padding: 8px 14px;
-        border-radius: 30px;
-
-        background: rgba(255,255,255,0.13);
-        border: 1px solid rgba(255,255,255,0.20);
-
-        backdrop-filter: blur(10px);
-
-        color: white;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 1.2px;
-    }
-
-
-    /* ---------------------------------------
-       Profile Content
-    --------------------------------------- */
-
-    .profile-content {
-        padding: 0 32px 35px;
-    }
-
-
-    /* ---------------------------------------
-       Logo
-    --------------------------------------- */
-
-    .logo-wrapper {
-        position: relative;
-        width: 112px;
-        height: 112px;
-        margin-top: -56px;
-        z-index: 2;
-    }
-
-    .logo {
-        width: 112px;
-        height: 112px;
-
-        border-radius: 50%;
-        object-fit: cover;
-
-        background: white;
-
-        border: 6px solid white;
-
-        box-shadow:
-            0 10px 30px rgba(0,0,0,0.15);
-    }
-
-
-    /* ---------------------------------------
-       Business Heading
-    --------------------------------------- */
-
-    .business-header {
-        margin-top: 18px;
-    }
-
-    .business-name {
-        font-family: "Playfair Display", serif;
-        font-size: 36px;
-        line-height: 1.15;
-        font-weight: 700;
-        color: var(--text);
-    }
-
-    .category {
-        display: inline-flex;
-        margin-top: 10px;
-
-        padding: 7px 13px;
-
-        border-radius: 30px;
-
-        background: var(--green-light);
-        color: var(--primary);
-
-        font-size: 13px;
-        font-weight: 700;
-    }
-
-
-    /* ---------------------------------------
-       Description
-    --------------------------------------- */
-
-    .description {
-        margin-top: 22px;
-
-        color: #596662;
-        font-size: 15px;
-        line-height: 1.8;
-    }
-
-
-    /* ---------------------------------------
-       Business ID + QR
-    --------------------------------------- */
-
-    .business-id-box {
-        margin-top: 22px;
-        padding: 16px;
-
-        border: 1px dashed #cbd9d5;
-        border-radius: 18px;
-
-        background: #f8fbfa;
-
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        gap: 20px;
-    }
-
-    .business-id-content {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .business-id-label {
-        font-size: 11px;
-        color: #82908d;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        margin-bottom: 6px;
-    }
-
-    .business-id {
-        font-family: monospace;
-        font-size: 13px;
-        color: var(--primary);
-        word-break: break-all;
-        font-weight: 600;
-    }
-
-    .qr-hint {
-        margin-top: 9px;
-        font-size: 11px;
-        color: #8a9693;
-        line-height: 1.5;
-    }
-
-
-    /* ---------------------------------------
-       QR Area
-    --------------------------------------- */
-
-    .qr-area {
-        flex-shrink: 0;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .qr-wrapper {
-        width: 116px;
-        height: 116px;
-
-        padding: 8px;
-
-        background: white;
-
-        border-radius: 15px;
-
-        border: 1px solid #e1e9e6;
-
-        box-shadow:
-            0 7px 20px rgba(0, 0, 0, 0.08);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #businessQr {
-        width: 100px;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    #businessQr img,
-    #businessQr canvas {
-        display: block;
-        width: 100px !important;
-        height: 100px !important;
-    }
-
-    .download-qr-btn {
-        border: none;
-
-        padding: 8px 12px;
-
-        border-radius: 9px;
-
-        background: var(--primary);
-        color: white;
-
-        font-family: "DM Sans", sans-serif;
-
-        font-size: 11px;
-        font-weight: 700;
-
-        cursor: pointer;
-
-        transition:
-            transform 0.2s ease,
-            background 0.2s ease;
-
-        white-space: nowrap;
-    }
-
-    .download-qr-btn:hover {
-        background: var(--primary-dark);
-        transform: translateY(-1px);
-    }
-
-    .download-qr-btn:active {
-        transform: translateY(0);
-    }
-
-
-    /* ---------------------------------------
-       Divider
-    --------------------------------------- */
-
-    .divider {
-        height: 1px;
-        background: var(--border);
-        margin: 30px 0;
-    }
-
-
-    /* ---------------------------------------
-       Information Grid
-    --------------------------------------- */
-
-    .section-title {
-        font-size: 17px;
-        font-weight: 700;
-        margin-bottom: 15px;
-    }
-
-    .info-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    .info-card {
-        padding: 17px;
-        border-radius: 17px;
-        background: #f8faf9;
-        border: 1px solid #edf1ef;
-    }
-
-    .info-icon {
-        font-size: 19px;
-        margin-bottom: 9px;
-    }
-
-    .info-label {
-        display: block;
-        font-size: 11px;
-        color: #899591;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 5px;
-    }
-
-    .info-value {
-        font-size: 14px;
-        color: #394641;
-        line-height: 1.5;
-        word-break: break-word;
-    }
-
-    .info-value a {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 600;
-    }
-
-
-    /* ---------------------------------------
-       Services / Products
-    --------------------------------------- */
-
-    .tag-section {
-        margin-top: 30px;
-    }
-
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 9px;
-    }
-
-    .tag {
-        padding: 9px 14px;
-        border-radius: 30px;
-
-        background: white;
-        border: 1px solid #dfe9e6;
-
-        color: #465651;
-
-        font-size: 13px;
-        font-weight: 600;
-
-        box-shadow:
-            0 3px 10px rgba(0,0,0,0.025);
-    }
-
-    .tag.service {
-        color: var(--primary);
-        background: #edf8f5;
-        border-color: #d7eee9;
-    }
-
-
-    /* ---------------------------------------
-       Social Links
-    --------------------------------------- */
-
-    .social-section {
-        margin-top: 30px;
-    }
-
-    .social-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .social-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-
-        padding: 11px 15px;
-
-        border-radius: 13px;
-
-        background: white;
-        border: 1px solid #e1e9e6;
-
-        color: #35433f;
-        text-decoration: none;
-
-        font-size: 13px;
-        font-weight: 600;
-
-        transition: all 0.2s ease;
-    }
-
-    .social-link:hover {
-        transform: translateY(-2px);
-        border-color: #b9d8d1;
-        box-shadow:
-            0 8px 20px rgba(0,0,0,0.06);
-    }
-
-
-    /* ---------------------------------------
-       Main Actions
-    --------------------------------------- */
-
-    .actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-        margin-top: 32px;
-    }
-
-    .btn {
-        min-height: 54px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 9px;
-
-        border-radius: 15px;
-
-        text-decoration: none;
-
-        font-size: 14px;
-        font-weight: 700;
-
-        transition: all 0.2s ease;
-    }
-
-    .btn:hover {
-        transform: translateY(-2px);
-    }
-
-    .call-btn {
-        background: var(--primary);
-        color: white;
-        box-shadow:
-            0 10px 20px rgba(7, 94, 84, 0.20);
-    }
-
-    .whatsapp-btn {
-        background: #25d366;
-        color: white;
-        box-shadow:
-            0 10px 20px rgba(37, 211, 102, 0.18);
-    }
-
-
-    /* ---------------------------------------
-       Footer
-    --------------------------------------- */
-
-    .profile-footer {
-        text-align: center;
-        margin-top: 25px;
-        color: #9aa6a3;
-        font-size: 11px;
-        letter-spacing: 0.4px;
-    }
-
-    .profile-footer strong {
-        color: var(--primary);
-    }
-
-
-    /* ---------------------------------------
-       Responsive
-    --------------------------------------- */
-
-    @media (max-width: 600px) {
-
+    
+        :root {
+            --primary: #075e54;
+            --primary-dark: #043f39;
+            --secondary: #128c7e;
+            --green-light: #e8f5f2;
+            --text: #17201e;
+            --muted: #71807c;
+            --border: #e7ecea;
+            --white: #ffffff;
+            --background: #f4f7f6;
+        }
+    
+        body {
+            font-family: "DM Sans", sans-serif;
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(18, 140, 126, 0.10),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(7, 94, 84, 0.08),
+                    transparent 35%
+                ),
+                var(--background);
+    
+            color: var(--text);
+            min-height: 100vh;
+        }
+    
+    
+        /* ---------------------------------------
+           Main Container
+        --------------------------------------- */
+    
         .container {
-            padding: 12px 10px 35px;
+            width: 100%;
+            max-width: 760px;
+            margin: auto;
+            padding: 30px 18px 50px;
         }
-
-        .profile-card {
-            border-radius: 24px;
-        }
-
-        .hero {
-            height: 200px;
-        }
-
-        .profile-content {
-            padding: 0 20px 28px;
-        }
-
-        .business-name {
-            font-size: 30px;
-        }
-
-        .info-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .actions {
-            grid-template-columns: 1fr;
-        }
-
-        .business-id-box {
+    
+    
+        /* ---------------------------------------
+           Loading
+        --------------------------------------- */
+    
+        .loading {
+            min-height: 70vh;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 14px;
+            color: var(--muted);
         }
-
+    
+        .loader {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #dce9e6;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+    
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    
+    
+        /* ---------------------------------------
+           Error
+        --------------------------------------- */
+    
+        .error {
+            max-width: 500px;
+            margin: 100px auto;
+            text-align: center;
+            background: white;
+            border-radius: 24px;
+            padding: 45px 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.07);
+        }
+    
+        .error-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff0f0;
+            color: #d32f2f;
+            font-size: 25px;
+        }
+    
+        .error h2 {
+            margin-bottom: 8px;
+        }
+    
+        .error p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+    
+    
+        /* ---------------------------------------
+           Profile
+        --------------------------------------- */
+    
+        .profile-card {
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow:
+                0 30px 80px rgba(25, 65, 58, 0.12),
+                0 5px 20px rgba(0, 0, 0, 0.04);
+        }
+    
+    
+        /* ---------------------------------------
+           Hero
+        --------------------------------------- */
+    
+        .hero {
+            height: 230px;
+            position: relative;
+            overflow: hidden;
+    
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 255, 255, 0.20),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(255, 255, 255, 0.12),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #064c44,
+                    #08766a 50%,
+                    #12a08e
+                );
+        }
+    
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.12);
+            top: -150px;
+            right: -60px;
+        }
+    
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.10);
+            bottom: -130px;
+            left: -70px;
+        }
+    
+    
+        /* ---------------------------------------
+           VANIKIO Badge
+        --------------------------------------- */
+    
+        .vanikio-badge {
+            position: absolute;
+            top: 22px;
+            left: 22px;
+    
+            padding: 8px 14px;
+            border-radius: 30px;
+    
+            background: rgba(255,255,255,0.13);
+            border: 1px solid rgba(255,255,255,0.20);
+    
+            backdrop-filter: blur(10px);
+    
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+    
+    
+        /* ---------------------------------------
+           Profile Content
+        --------------------------------------- */
+    
+        .profile-content {
+            padding: 0 32px 35px;
+        }
+    
+    
+        /* ---------------------------------------
+           Logo
+        --------------------------------------- */
+    
+        .logo-wrapper {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            margin-top: -56px;
+            z-index: 2;
+        }
+    
+        .logo {
+            width: 112px;
+            height: 112px;
+    
+            border-radius: 50%;
+            object-fit: cover;
+    
+            background: white;
+    
+            border: 6px solid white;
+    
+            box-shadow:
+                0 10px 30px rgba(0,0,0,0.15);
+        }
+    
+    
+        /* ---------------------------------------
+           Business Heading
+        --------------------------------------- */
+    
+        .business-header {
+            margin-top: 18px;
+        }
+    
+        .business-name {
+            font-family: "Playfair Display", serif;
+            font-size: 36px;
+            line-height: 1.15;
+            font-weight: 700;
+            color: var(--text);
+        }
+    
+        .category {
+            display: inline-flex;
+            margin-top: 10px;
+    
+            padding: 7px 13px;
+    
+            border-radius: 30px;
+    
+            background: var(--green-light);
+            color: var(--primary);
+    
+            font-size: 13px;
+            font-weight: 700;
+        }
+    
+    
+        /* ---------------------------------------
+           Description
+        --------------------------------------- */
+    
+        .description {
+            margin-top: 22px;
+    
+            color: #596662;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+    
+    
+        /* ---------------------------------------
+           Business ID + QR
+        --------------------------------------- */
+    
+        .business-id-box {
+            margin-top: 22px;
+            padding: 16px;
+    
+            border: 1px dashed #cbd9d5;
+            border-radius: 18px;
+    
+            background: #f8fbfa;
+    
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            gap: 20px;
+        }
+    
+        .business-id-content {
+            flex: 1;
+            min-width: 0;
+        }
+    
+        .business-id-label {
+            font-size: 11px;
+            color: #82908d;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 6px;
+        }
+    
+        .business-id {
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--primary);
+            word-break: break-all;
+            font-weight: 600;
+        }
+    
+        .qr-hint {
+            margin-top: 9px;
+            font-size: 11px;
+            color: #8a9693;
+            line-height: 1.5;
+        }
+    
+    
+        /* ---------------------------------------
+           QR Area
+        --------------------------------------- */
+    
+        .qr-area {
+            flex-shrink: 0;
+    
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+    
         .qr-wrapper {
+            width: 116px;
+            height: 116px;
+    
+            padding: 8px;
+    
+            background: white;
+    
+            border-radius: 15px;
+    
+            border: 1px solid #e1e9e6;
+    
+            box-shadow:
+                0 7px 20px rgba(0, 0, 0, 0.08);
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    
+        #businessQr {
             width: 100px;
             height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .qr-hint {
-            max-width: 180px;
+    
+        #businessQr img,
+        #businessQr canvas {
+            display: block;
+            width: 100px !important;
+            height: 100px !important;
         }
-    }
-
-    @media (max-width: 430px) {
-
-        .business-id-box {
-            flex-direction: column;
-            align-items: stretch;
-        }
-
-        .qr-area {
-            width: 100%;
-        }
-
-        .qr-wrapper {
-            width: 125px;
-            height: 125px;
-        }
-
+    
         .download-qr-btn {
-            width: 125px;
+            border: none;
+    
+            padding: 8px 12px;
+    
+            border-radius: 9px;
+    
+            background: var(--primary);
+            color: white;
+    
+            font-family: "DM Sans", sans-serif;
+    
+            font-size: 11px;
+            font-weight: 700;
+    
+            cursor: pointer;
+    
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+    
+            white-space: nowrap;
+        }
+    
+        .download-qr-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+    
+        .download-qr-btn:active {
+            transform: translateY(0);
+        }
+    
+    
+        /* ---------------------------------------
+           Divider
+        --------------------------------------- */
+    
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 30px 0;
+        }
+    
+    
+        /* ---------------------------------------
+           Information Grid
+        --------------------------------------- */
+    
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+    
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+    
+        .info-card {
+            padding: 17px;
+            border-radius: 17px;
+            background: #f8faf9;
+            border: 1px solid #edf1ef;
+        }
+    
+        .info-icon {
+            font-size: 19px;
+            margin-bottom: 9px;
+        }
+    
+        .info-label {
+            display: block;
+            font-size: 11px;
+            color: #899591;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+    
+        .info-value {
+            font-size: 14px;
+            color: #394641;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+    
+        .info-value a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    
+    
+        /* ---------------------------------------
+           Services / Products
+        --------------------------------------- */
+    
+        .tag-section {
+            margin-top: 30px;
+        }
+    
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+    
+        .tag {
+            padding: 9px 14px;
+            border-radius: 30px;
+    
+            background: white;
+            border: 1px solid #dfe9e6;
+    
+            color: #465651;
+    
+            font-size: 13px;
+            font-weight: 600;
+    
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.025);
+        }
+    
+        .tag.service {
+            color: var(--primary);
+            background: #edf8f5;
+            border-color: #d7eee9;
+        }
+    
+    
+        /* ---------------------------------------
+           Social Links
+        --------------------------------------- */
+    
+        .social-section {
+            margin-top: 30px;
+        }
+    
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+    
+            padding: 11px 15px;
+    
+            border-radius: 13px;
+    
+            background: white;
+            border: 1px solid #e1e9e6;
+    
+            color: #35433f;
+            text-decoration: none;
+    
+            font-size: 13px;
+            font-weight: 600;
+    
+            transition: all 0.2s ease;
+        }
+    
+        .social-link:hover {
+            transform: translateY(-2px);
+            border-color: #b9d8d1;
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.06);
+        }
+    
+    
+        /* ---------------------------------------
+           Main Actions
+        --------------------------------------- */
+    
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 32px;
+        }
+    
+        .btn {
+            min-height: 54px;
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+    
+            border-radius: 15px;
+    
+            text-decoration: none;
+    
+            font-size: 14px;
+            font-weight: 700;
+    
+            transition: all 0.2s ease;
+        }
+    
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+    
+        .call-btn {
+            background: var(--primary);
+            color: white;
+            box-shadow:
+                0 10px 20px rgba(7, 94, 84, 0.20);
+        }
+    
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            box-shadow:
+                0 10px 20px rgba(37, 211, 102, 0.18);
+        }
+    
+    
+        /* ---------------------------------------
+           Footer
+        --------------------------------------- */
+    
+        .profile-footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #9aa6a3;
+            font-size: 11px;
+            letter-spacing: 0.4px;
+        }
+    
+        .profile-footer strong {
+            color: var(--primary);
+        }
+    
+    
+        /* ---------------------------------------
+           Responsive
+        --------------------------------------- */
+    
+        @media (max-width: 600px) {
+    
+            .container {
+                padding: 12px 10px 35px;
+            }
+    
+            .profile-card {
+                border-radius: 24px;
+            }
+    
+            .hero {
+                height: 200px;
+            }
+    
+            .profile-content {
+                padding: 0 20px 28px;
+            }
+    
+            .business-name {
+                font-size: 30px;
+            }
+    
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+    
+            .actions {
+                grid-template-columns: 1fr;
+            }
+    
+            .business-id-box {
+                align-items: center;
+            }
+    
+            .qr-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+    
+            .qr-hint {
+                max-width: 180px;
+            }
+        }
+    
+        @media (max-width: 430px) {
+    
+            .business-id-box {
+                flex-direction: column;
+                align-items: stretch;
+            }
+    
+            .qr-area {
+                width: 100%;
+            }
+    
+            .qr-wrapper {
+                width: 125px;
+                height: 125px;
+            }
+    
+            .download-qr-btn {
+                width: 125px;
+            }
+    
         }
 
-    }
-
-</style>
-```
+    </style>
+    
 
 </head>
 
@@ -729,353 +729,353 @@
 
 <div class="container">
 
-```
-<!-- Loading -->
+    
+    <!-- Loading -->
 
-<div id="loading" class="loading">
+    <div id="loading" class="loading">
 
-    <div class="loader"></div>
+        <div class="loader"></div>
 
-    <div>
-        Loading business profile...
-    </div>
-
-</div>
-
-
-<!-- Error -->
-
-<div id="error" class="error" style="display:none;">
-
-    <div class="error-icon">
-        !
-    </div>
-
-    <h2>Business Profile Not Found</h2>
-
-    <p id="errorDetail">
-        We couldn't load this business profile.
-    </p>
-
-</div>
-
-
-<!-- Profile -->
-
-<div id="profile" style="display:none;">
-
-    <div class="profile-card">
-
-        <!-- Hero -->
-
-        <div class="hero">
-
-            <div class="vanikio-badge">
-                VANIKIO
-            </div>
-
+        <div>
+            Loading business profile...
         </div>
 
-
-        <!-- Content -->
-
-        <div class="profile-content">
-
-            <!-- Logo -->
-
-            <div class="logo-wrapper">
-
-                <img
-                    id="businessLogo"
-                    class="logo"
-                    src=""
-                    alt="Business Logo"
-                >
-
-            </div>
+    </div>
 
 
-            <!-- Business Header -->
+    <!-- Error -->
 
-            <div class="business-header">
+    <div id="error" class="error" style="display:none;">
 
-                <h1
-                    id="businessName"
-                    class="business-name"
-                >
-                </h1>
+        <div class="error-icon">
+            !
+        </div>
 
-                <div
-                    id="category"
-                    class="category"
-                >
+        <h2>Business Profile Not Found</h2>
+
+        <p id="errorDetail">
+            We couldn't load this business profile.
+        </p>
+
+    </div>
+
+
+    <!-- Profile -->
+
+    <div id="profile" style="display:none;">
+
+        <div class="profile-card">
+
+            <!-- Hero -->
+
+            <div class="hero">
+
+                <div class="vanikio-badge">
+                    VANIKIO
                 </div>
 
             </div>
 
 
-            <!-- About -->
+            <!-- Content -->
 
-            <p
-                id="description"
-                class="description"
-            >
-            </p>
+            <div class="profile-content">
+
+                <!-- Logo -->
+
+                <div class="logo-wrapper">
+
+                    <img
+                            id="businessLogo"
+                            class="logo"
+                            src=""
+                            alt="Business Logo"
+                    >
+
+                </div>
 
 
-            <!-- Business ID + QR -->
+                <!-- Business Header -->
 
-            <div class="business-id-box">
+                <div class="business-header">
 
-                <div class="business-id-content">
-
-                    <div class="business-id-label">
-                        Business ID
-                    </div>
+                    <h1
+                            id="businessName"
+                            class="business-name"
+                    >
+                    </h1>
 
                     <div
-                        id="businessId"
-                        class="business-id"
+                            id="category"
+                            class="category"
                     >
                     </div>
 
-                    <div class="qr-hint">
-                        Scan the QR code to open this business profile
-                    </div>
-
                 </div>
 
 
-                <div class="qr-area">
+                <!-- About -->
 
-                    <div class="qr-wrapper">
-
-                        <div
-                            id="businessQr"
-                        ></div>
-
-                    </div>
-
-                    <button
-                        id="downloadQrButton"
-                        class="download-qr-btn"
-                        type="button"
-                    >
-                        ↓ Download QR
-                    </button>
-
-                </div>
-
-            </div>
+                <p
+                        id="description"
+                        class="description"
+                >
+                </p>
 
 
-            <div class="divider"></div>
+                <!-- Business ID + QR -->
 
+                <div class="business-id-box">
 
-            <!-- Contact Information -->
+                    <div class="business-id-content">
 
-            <div>
-
-                <div class="section-title">
-                    Business Information
-                </div>
-
-
-                <div class="info-grid">
-
-
-                    <!-- Location -->
-
-                    <div class="info-card">
-
-                        <div class="info-icon">
-                            📍
+                        <div class="business-id-label">
+                            Business ID
                         </div>
 
-                        <span class="info-label">
+                        <div
+                                id="businessId"
+                                class="business-id"
+                        >
+                        </div>
+
+                        <div class="qr-hint">
+                            Scan the QR code to open this business profile
+                        </div>
+
+                    </div>
+
+
+                    <div class="qr-area">
+
+                        <div class="qr-wrapper">
+
+                            <div
+                                    id="businessQr"
+                            ></div>
+
+                        </div>
+
+                        <button
+                                id="downloadQrButton"
+                                class="download-qr-btn"
+                                type="button"
+                        >
+                            ↓ Download QR
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="divider"></div>
+
+
+                <!-- Contact Information -->
+
+                <div>
+
+                    <div class="section-title">
+                        Business Information
+                    </div>
+
+
+                    <div class="info-grid">
+
+
+                        <!-- Location -->
+
+                        <div class="info-card">
+
+                            <div class="info-icon">
+                                📍
+                            </div>
+
+                            <span class="info-label">
                             Location
                         </span>
 
-                        <span
-                            id="address"
-                            class="info-value"
-                        >
+                            <span
+                                    id="address"
+                                    class="info-value"
+                            >
                         </span>
 
-                    </div>
-
-
-                    <!-- Phone -->
-
-                    <div class="info-card">
-
-                        <div class="info-icon">
-                            📞
                         </div>
 
-                        <span class="info-label">
+
+                        <!-- Phone -->
+
+                        <div class="info-card">
+
+                            <div class="info-icon">
+                                📞
+                            </div>
+
+                            <span class="info-label">
                             Phone
                         </span>
 
-                        <span
-                            id="phone"
-                            class="info-value"
-                        >
+                            <span
+                                    id="phone"
+                                    class="info-value"
+                            >
                         </span>
 
-                    </div>
-
-
-                    <!-- Email -->
-
-                    <div class="info-card">
-
-                        <div class="info-icon">
-                            ✉️
                         </div>
 
-                        <span class="info-label">
+
+                        <!-- Email -->
+
+                        <div class="info-card">
+
+                            <div class="info-icon">
+                                ✉️
+                            </div>
+
+                            <span class="info-label">
                             Email
                         </span>
 
-                        <span
-                            id="email"
-                            class="info-value"
-                        >
+                            <span
+                                    id="email"
+                                    class="info-value"
+                            >
                         </span>
 
-                    </div>
-
-
-                    <!-- Website -->
-
-                    <div class="info-card">
-
-                        <div class="info-icon">
-                            🌐
                         </div>
 
-                        <span class="info-label">
+
+                        <!-- Website -->
+
+                        <div class="info-card">
+
+                            <div class="info-icon">
+                                🌐
+                            </div>
+
+                            <span class="info-label">
                             Website
                         </span>
 
-                        <span
-                            id="website"
-                            class="info-value"
-                        >
+                            <span
+                                    id="website"
+                                    class="info-value"
+                            >
                         </span>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-            </div>
 
-
-            <!-- Services -->
-
-            <div
-                id="servicesSection"
-                class="tag-section"
-                style="display:none;"
-            >
-
-                <div class="section-title">
-                    Services
-                </div>
+                <!-- Services -->
 
                 <div
-                    id="services"
-                    class="tags"
+                        id="servicesSection"
+                        class="tag-section"
+                        style="display:none;"
                 >
+
+                    <div class="section-title">
+                        Services
+                    </div>
+
+                    <div
+                            id="services"
+                            class="tags"
+                    >
+                    </div>
+
                 </div>
 
-            </div>
 
-
-            <!-- Products -->
-
-            <div
-                id="productsSection"
-                class="tag-section"
-                style="display:none;"
-            >
-
-                <div class="section-title">
-                    Products
-                </div>
+                <!-- Products -->
 
                 <div
-                    id="products"
-                    class="tags"
+                        id="productsSection"
+                        class="tag-section"
+                        style="display:none;"
                 >
+
+                    <div class="section-title">
+                        Products
+                    </div>
+
+                    <div
+                            id="products"
+                            class="tags"
+                    >
+                    </div>
+
                 </div>
 
-            </div>
 
-
-            <!-- Social Links -->
-
-            <div
-                id="socialSection"
-                class="social-section"
-                style="display:none;"
-            >
-
-                <div class="section-title">
-                    Connect
-                </div>
+                <!-- Social Links -->
 
                 <div
-                    id="socialLinks"
-                    class="social-links"
+                        id="socialSection"
+                        class="social-section"
+                        style="display:none;"
                 >
+
+                    <div class="section-title">
+                        Connect
+                    </div>
+
+                    <div
+                            id="socialLinks"
+                            class="social-links"
+                    >
+                    </div>
+
                 </div>
 
-            </div>
+
+                <!-- Actions -->
+
+                <div class="actions">
+
+                    <a
+                            id="callButton"
+                            class="btn call-btn"
+                            href="#"
+                    >
+                        📞 Call
+                    </a>
 
 
-            <!-- Actions -->
+                    <a
+                            id="whatsappButton"
+                            class="btn whatsapp-btn"
+                            href="#"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                    >
+                        💬 WhatsApp
+                    </a>
 
-            <div class="actions">
-
-                <a
-                    id="callButton"
-                    class="btn call-btn"
-                    href="#"
-                >
-                    📞 Call
-                </a>
-
-
-                <a
-                    id="whatsappButton"
-                    class="btn whatsapp-btn"
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    💬 WhatsApp
-                </a>
+                </div>
 
             </div>
 
         </div>
 
+
+        <!-- Footer -->
+
+        <div class="profile-footer">
+
+            Powered by
+            <strong>VANIKIO</strong>
+
+        </div>
+
     </div>
-
-
-    <!-- Footer -->
-
-    <div class="profile-footer">
-
-        Powered by
-        <strong>VANIKIO</strong>
-
-    </div>
-
-</div>
-```
+    
 
 </div>
 
@@ -1290,7 +1290,7 @@
                         text: profileUrl,
                         width: 100,
                         height: 100,
-                        colorDark: "#075e54",
+                        colorDark: "#000000",
                         colorLight: "#ffffff",
                         correctLevel: QRCode.CorrectLevel.H
                     }
@@ -1623,92 +1623,195 @@
     // Download QR
     // ---------------------------------------
 
-    function downloadQr(
-        qrContainer,
-        businessName
-    ) {
 
-        if (!qrContainer) {
+function downloadQr(
+    qrContainer,
+    businessName
+) {
 
-            alert(
-                "QR code is not ready yet."
-            );
+    if (!qrContainer) {
 
-            return;
-        }
+        alert(
+            "QR code is not ready yet."
+        );
+
+        return;
+    }
 
 
-        const canvas =
-            qrContainer.querySelector(
-                "canvas"
-            );
+    const qrCanvas =
+        qrContainer.querySelector(
+            "canvas"
+        );
 
+
+    const qrImage =
+        qrContainer.querySelector(
+            "img"
+        );
+
+
+    if (!qrCanvas && !qrImage) {
+
+        alert(
+            "QR code is not ready yet."
+        );
+
+        return;
+    }
+
+
+    /*
+     * Create downloadable image
+     * with a white curved background.
+     */
+
+    const padding = 28;
+    const qrSize = 100;
+    const radius = 28;
+
+    const canvas =
+        document.createElement(
+            "canvas"
+        );
+
+    canvas.width =
+        qrSize + (padding * 2);
+
+    canvas.height =
+        qrSize + (padding * 2);
+
+
+    const ctx =
+        canvas.getContext(
+            "2d"
+        );
+
+
+    /*
+     * White rounded background
+     */
+
+    ctx.fillStyle =
+        "#ffffff";
+
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height,
+        radius
+    );
+
+    ctx.fill();
+
+
+    /*
+     * Draw QR code.
+     */
+
+    if (qrCanvas) {
+
+        ctx.drawImage(
+            qrCanvas,
+            padding,
+            padding,
+            qrSize,
+            qrSize
+        );
+
+    } else {
+
+        /*
+         * QRCode.js can sometimes
+         * generate an image instead
+         * of a canvas.
+         */
 
         const image =
-            qrContainer.querySelector(
-                "img"
-            );
+            new Image();
 
+        image.onload =
+            function() {
 
-        let dataUrl =
-            null;
-
-
-        if (canvas) {
-
-            dataUrl =
-                canvas.toDataURL(
-                    "image/png"
+                ctx.drawImage(
+                    image,
+                    padding,
+                    padding,
+                    qrSize,
+                    qrSize
                 );
 
-        } else if (image) {
 
-            dataUrl =
-                image.src;
+                downloadCanvas(
+                    canvas,
+                    businessName
+                );
 
-        }
+            };
 
+        image.src =
+            qrImage.src;
 
-        if (!dataUrl) {
-
-            alert(
-                "QR code is not ready yet."
-            );
-
-            return;
-        }
-
-
-        const link =
-            document.createElement(
-                "a"
-            );
-
-
-        link.download =
-            sanitizeFileName(
-                businessName
-            ) +
-            "-VANIKIO-QR.png";
-
-
-        link.href =
-            dataUrl;
-
-
-        document.body.appendChild(
-            link
-        );
-
-
-        link.click();
-
-
-        document.body.removeChild(
-            link
-        );
-
+        return;
     }
+
+
+    downloadCanvas(
+        canvas,
+        businessName
+    );
+}
+
+
+// ---------------------------------------
+// Download Canvas
+// ---------------------------------------
+
+function downloadCanvas(
+    canvas,
+    businessName
+) {
+
+    const dataUrl =
+        canvas.toDataURL(
+            "image/png"
+        );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    link.download =
+        sanitizeFileName(
+            businessName
+        ) +
+        "-VANIKIO-QR.png";
+
+
+    link.href =
+        dataUrl;
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    document.body.removeChild(
+        link
+    );
+}
+
 
 
     // ---------------------------------------
