@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,6 +14,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
         rel="stylesheet">
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode/1.5.3/qrcode.min.js"></script>
 
     <style>
 
@@ -306,22 +310,28 @@
 
 
         /* ---------------------------------------
-           Business ID
+           Business ID + QR
         --------------------------------------- */
 
         .business-id-box {
             margin-top: 22px;
-            padding: 13px 15px;
+            padding: 16px;
 
             border: 1px dashed #cbd9d5;
-            border-radius: 14px;
+            border-radius: 18px;
 
             background: #f8fbfa;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
+
+            gap: 20px;
+        }
+
+        .business-id-content {
+            flex: 1;
+            min-width: 0;
         }
 
         .business-id-label {
@@ -330,6 +340,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.8px;
+            margin-bottom: 6px;
         }
 
         .business-id {
@@ -337,6 +348,87 @@
             font-size: 13px;
             color: var(--primary);
             word-break: break-all;
+            font-weight: 600;
+        }
+
+        .qr-hint {
+            margin-top: 9px;
+            font-size: 11px;
+            color: #8a9693;
+            line-height: 1.5;
+        }
+
+
+        /* ---------------------------------------
+           QR Area
+        --------------------------------------- */
+
+        .qr-area {
+            flex-shrink: 0;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qr-wrapper {
+            width: 116px;
+            height: 116px;
+
+            padding: 8px;
+
+            background: white;
+
+            border-radius: 15px;
+
+            border: 1px solid #e1e9e6;
+
+            box-shadow:
+                0 7px 20px rgba(0, 0, 0, 0.08);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #businessQr {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .download-qr-btn {
+            border: none;
+
+            padding: 8px 12px;
+
+            border-radius: 9px;
+
+            background: var(--primary);
+            color: white;
+
+            font-family: "DM Sans", sans-serif;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease;
+
+            white-space: nowrap;
+        }
+
+        .download-qr-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .download-qr-btn:active {
+            transform: translateY(0);
         }
 
 
@@ -429,7 +521,8 @@
             font-size: 13px;
             font-weight: 600;
 
-            box-shadow: 0 3px 10px rgba(0,0,0,0.025);
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.025);
         }
 
         .tag.service {
@@ -477,7 +570,8 @@
         .social-link:hover {
             transform: translateY(-2px);
             border-color: #b9d8d1;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            box-shadow:
+                0 8px 20px rgba(0,0,0,0.06);
         }
 
 
@@ -517,13 +611,15 @@
         .call-btn {
             background: var(--primary);
             color: white;
-            box-shadow: 0 10px 20px rgba(7, 94, 84, 0.20);
+            box-shadow:
+                0 10px 20px rgba(7, 94, 84, 0.20);
         }
 
         .whatsapp-btn {
             background: #25d366;
             color: white;
-            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.18);
+            box-shadow:
+                0 10px 20px rgba(37, 211, 102, 0.18);
         }
 
 
@@ -579,8 +675,37 @@
             }
 
             .business-id-box {
-                align-items: flex-start;
+                align-items: center;
+            }
+
+            .qr-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+
+            .qr-hint {
+                max-width: 180px;
+            }
+        }
+
+        @media (max-width: 430px) {
+
+            .business-id-box {
                 flex-direction: column;
+                align-items: stretch;
+            }
+
+            .qr-area {
+                width: 100%;
+            }
+
+            .qr-wrapper {
+                width: 125px;
+                height: 125px;
+            }
+
+            .download-qr-btn {
+                width: 125px;
             }
         }
 
@@ -685,11 +810,11 @@
                 </p>
 
 
-                <!-- Business ID -->
+                <!-- Business ID + QR -->
 
                 <div class="business-id-box">
 
-                    <div>
+                    <div class="business-id-content">
 
                         <div class="business-id-label">
                             Business ID
@@ -700,6 +825,32 @@
                             class="business-id"
                         >
                         </div>
+
+                        <div class="qr-hint">
+                            Scan the QR code to open this business profile
+                        </div>
+
+                    </div>
+
+
+                    <div class="qr-area">
+
+                        <div class="qr-wrapper">
+
+                            <canvas
+                                id="businessQr"
+                            >
+                            </canvas>
+
+                        </div>
+
+                        <button
+                            id="downloadQrButton"
+                            class="download-qr-btn"
+                            type="button"
+                        >
+                            ↓ Download QR
+                        </button>
 
                     </div>
 
@@ -1094,6 +1245,76 @@
 
 
             // ---------------------------------------
+            // Generate QR
+            // ---------------------------------------
+
+            const profileUrl =
+                window.location.origin +
+                window.location.pathname +
+                "?id=" +
+                encodeURIComponent(id);
+
+
+            console.log(
+                "QR URL:",
+                profileUrl
+            );
+
+
+            const qrCanvas =
+                document.getElementById(
+                    "businessQr"
+                );
+
+
+            QRCode.toCanvas(
+                qrCanvas,
+                profileUrl,
+                {
+                    width: 100,
+                    margin: 1,
+                    errorCorrectionLevel: "H"
+                },
+                function(error) {
+
+                    if (error) {
+
+                        console.error(
+                            "QR generation error:",
+                            error
+                        );
+
+                    } else {
+
+                        console.log(
+                            "QR generated successfully"
+                        );
+                    }
+                }
+            );
+
+
+            // ---------------------------------------
+            // Download QR
+            // ---------------------------------------
+
+            document.getElementById(
+                "downloadQrButton"
+            ).addEventListener(
+                "click",
+                function() {
+
+                    downloadQr(
+                        qrCanvas,
+                        business.name ||
+                        "business"
+                    );
+
+                }
+            );
+
+
+            // ---------------------------------------
             // Location
             // ---------------------------------------
 
@@ -1183,14 +1404,6 @@
                     website.trim();
 
 
-                /*
-                 * Handles both:
-                 *
-                 * https://example.com
-                 *
-                 * example.com
-                 */
-
                 if (
                     !websiteUrl.startsWith(
                         "http://"
@@ -1238,13 +1451,6 @@
                     business.logoUrl;
 
             } else {
-
-                /*
-                 * No logoUrl currently exists
-                 * in your Firestore document.
-                 *
-                 * Use a generated initials logo.
-                 */
 
                 const initials =
                     getInitials(
@@ -1396,6 +1602,86 @@
 
 
     // ---------------------------------------
+    // Download QR
+    // ---------------------------------------
+
+    function downloadQr(
+        canvas,
+        businessName
+    ) {
+
+        if (!canvas) {
+
+            alert(
+                "QR code is not ready yet."
+            );
+
+            return;
+        }
+
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.download =
+            sanitizeFileName(
+                businessName
+            ) +
+            "-VANIKIO-QR.png";
+
+
+        link.href =
+            canvas.toDataURL(
+                "image/png"
+            );
+
+
+        document.body.appendChild(
+            link
+        );
+
+
+        link.click();
+
+
+        document.body.removeChild(
+            link
+        );
+
+    }
+
+
+    // ---------------------------------------
+    // File Name
+    // ---------------------------------------
+
+    function sanitizeFileName(
+        name
+    ) {
+
+        return name
+            .toString()
+            .trim()
+            .replace(
+                /[^a-z0-9]/gi,
+                "-"
+            )
+            .replace(
+                /-+/g,
+                "-"
+            )
+            .replace(
+                /^-|-$/g,
+                ""
+            ) ||
+            "business";
+    }
+
+
+    // ---------------------------------------
     // Render Tags
     // ---------------------------------------
 
@@ -1510,12 +1796,9 @@
 
 
                 /*
-                 * Your Firestore data currently
-                 * contains Markdown-style URLs:
+                 * Handles:
                  *
-                 * [https://...](https://...)
-                 *
-                 * Convert them to normal URLs.
+                 * [https://example.com](https://example.com)
                  */
 
                 const markdownMatch =
@@ -1571,6 +1854,7 @@
                 anchor.innerHTML =
                     `
                         <span>↗</span>
+
                         <span>
                             ${link.platform || "Social"}
                         </span>
@@ -1599,7 +1883,9 @@
     // Get Initials
     // ---------------------------------------
 
-    function getInitials(name) {
+    function getInitials(
+        name
+    ) {
 
         const words =
             name
@@ -1608,7 +1894,9 @@
                 .filter(Boolean);
 
 
-        if (words.length === 1) {
+        if (
+            words.length === 1
+        ) {
 
             return words[0]
                 .substring(0, 2)
@@ -1741,3 +2029,4 @@
 </body>
 
 </html>
+
