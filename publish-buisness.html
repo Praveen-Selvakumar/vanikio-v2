@@ -1824,11 +1824,19 @@
                      * business document.
                      */
 
+                    /*
                     const previewUrl =
                         window.location.origin +
                         "/view-profile.html?slug=" +
                         encodeURIComponent(slug);
+                        */
 
+                    const previewUrl =
+                        window.location.origin +
+                        "/vanikio-v2/view-profile.html?slug=" +
+                        encodeURIComponent(slug);
+
+ 
 
                     generateQRCode(
                         previewUrl
@@ -2139,12 +2147,21 @@
                            business document from Firestore.
                         */
 
+                        /*
                         const businessUrl =
                             window.location.origin +
                             "/view-profile.html?id=" +
                             encodeURIComponent(
                                 businessId
-                            );
+                            ); 
+                        */
+
+                        
+
+                        const businessUrl =
+                           window.location.origin +
+                           "/vanikio-v2/view-profile.html?id=" +
+                            encodeURIComponent(businessId);
 
 
                         /* =========================================
