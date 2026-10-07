@@ -133,6 +133,13 @@
         .error {
             color: #d32f2f;
         }
+
+        .error-detail {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #777;
+            line-height: 1.6;
+        }
     </style>
 </head>
 
@@ -145,7 +152,9 @@
     </div>
 
     <div id="error" class="error" style="display:none;">
-        Business profile not found.
+        <strong>Business profile not found.</strong>
+
+        <div id="errorDetail" class="error-detail"></div>
     </div>
 
     <div id="profile" class="profile-card" style="display:none;">
@@ -222,53 +231,65 @@
 
     import {
         initializeApp
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
 
     import {
         getFirestore,
         doc,
         getDoc
-    } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
-    // Your Firebase configuration
+    // ---------------------------------------
+    // Firebase configuration
+    // ---------------------------------------
+
     const firebaseConfig = {
-         apiKey:
-        "AIzaSyDQp3SzKyJRSW4iAKgtVRATLkdm55y4JHQ",
 
-    authDomain:
-        "tabletap-3c1b9.firebaseapp.com",
+        apiKey:
+            "AIzaSyDQp3SzKyJRSW4iAKgtVRATLkdm55y4JHQ",
 
-    projectId:
-        "tabletap-3c1b9",
+        authDomain:
+            "tabletap-3c1b9.firebaseapp.com",
 
-    storageBucket:
-        "tabletap-3c1b9.firebasestorage.app",
+        projectId:
+            "tabletap-3c1b9",
 
-    messagingSenderId:
-        "17540244686",
+        storageBucket:
+            "tabletap-3c1b9.firebasestorage.app",
 
-    appId:
-        "1:17540244686:web:993d4136b661d5bbe3dc9f",
+        messagingSenderId:
+            "17540244686",
 
-    measurementId:
-        "G-L88D3WK9LW"
+        appId:
+            "1:17540244686:web:993d4136b661d5bbe3dc9f",
+
+        measurementId:
+            "G-L88D3WK9LW"
     };
 
-    
 
+    // ---------------------------------------
+    // Initialize Firebase
+    // ---------------------------------------
 
     const app = initializeApp(firebaseConfig);
+
     const db = getFirestore(app);
 
 
     // ---------------------------------------
-    // Get business ID from QR URL
+    // Get business ID from URL
     // ---------------------------------------
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+        new URLSearchParams(window.location.search);
 
-    const businessId = params.get("id");
+    const businessId =
+        params.get("id");
+
+
+    console.log("Business ID:", businessId);
 
 
     // ---------------------------------------
@@ -277,7 +298,9 @@
 
     if (!businessId) {
 
-        showError();
+        showError(
+            "No business ID was provided in the URL."
+        );
 
     } else {
 
@@ -294,105 +317,217 @@
 
         try {
 
-            const businessRef = doc(
-                db,
-                "businesses",
-                id
+            console.log(
+                "Loading Firestore document:",
+                `businesses/${id}`
             );
+
+
+            const businessRef =
+                doc(
+                    db,
+                    "businesses",
+                    id
+                );
+
 
             const businessSnapshot =
                 await getDoc(businessRef);
 
 
+            console.log(
+                "Document exists:",
+                businessSnapshot.exists()
+            );
+
+
+            // ---------------------------------------
+            // Business does not exist
+            // ---------------------------------------
+
             if (!businessSnapshot.exists()) {
 
-                showError();
-                return;
+                showError(
+                    `No business was found with ID: ${id}`
+                );
 
+                return;
             }
 
+
+            // ---------------------------------------
+            // Get business data
+            // ---------------------------------------
 
             const business =
                 businessSnapshot.data();
 
 
+            console.log(
+                "Business data:",
+                business
+            );
+
+
             // ---------------------------------------
-            // Display data
+            // Business Name
+            // Publisher saves: name
             // ---------------------------------------
 
             document.getElementById("businessName")
                 .textContent =
-                business.businessName || "Business";
+                business.name || "Business";
 
+
+            // ---------------------------------------
+            // Category
+            // ---------------------------------------
 
             document.getElementById("category")
                 .textContent =
                 business.category || "";
 
 
+            // ---------------------------------------
+            // About
+            // Publisher saves: about
+            // ---------------------------------------
+
             document.getElementById("description")
                 .textContent =
-                business.description || "";
+                business.about || "";
 
+
+            // ---------------------------------------
+            // Location
+            // Publisher saves: location
+            // ---------------------------------------
 
             document.getElementById("address")
                 .textContent =
-                business.address || "Not available";
+                business.location || "Not available";
+
+
+            // ---------------------------------------
+            // Phone
+            // ---------------------------------------
+
+            const phone =
+                business.phone || "";
 
 
             document.getElementById("phone")
                 .textContent =
-                business.phone || "Not available";
+                phone || "Not available";
+
+
+            // ---------------------------------------
+            // Email
+            // ---------------------------------------
+
+            const email =
+                business.email || "";
 
 
             document.getElementById("email")
                 .textContent =
-                business.email || "Not available";
+                email || "Not available";
 
 
-            document.getElementById("website")
-                .textContent =
-                business.website || "Not available";
+            // ---------------------------------------
+            // Website
+            // ---------------------------------------
+
+            const website =
+                business.website || "";
 
 
+            const websiteElement =
+                document.getElementById("website");
+
+
+            if (website) {
+
+                websiteElement.innerHTML =
+                    `<a href="${website}" target="_blank" style="color:#075e54;text-decoration:none;">
+                        ${website}
+                    </a>`;
+
+            } else {
+
+                websiteElement.textContent =
+                    "Not available";
+            }
+
+
+            // ---------------------------------------
             // Logo
+            // ---------------------------------------
 
             const logo =
                 document.getElementById("businessLogo");
 
+
             if (business.logoUrl) {
 
-                logo.src = business.logoUrl;
+                logo.src =
+                    business.logoUrl;
 
             } else {
 
-                logo.src = "https://via.placeholder.com/100";
-
+                logo.src =
+                    "https://via.placeholder.com/100";
             }
 
 
+            // ---------------------------------------
             // Call button
+            // ---------------------------------------
 
-            if (business.phone) {
+            const callButton =
+                document.getElementById("callButton");
 
-                document.getElementById("callButton")
-                    .href =
-                    `tel:${business.phone}`;
 
+            if (phone) {
+
+                callButton.href =
+                    `tel:${phone}`;
+
+            } else {
+
+                callButton.style.display =
+                    "none";
             }
 
 
+            // ---------------------------------------
             // WhatsApp
+            // Publisher saves: whatsapp
+            // ---------------------------------------
 
-            if (business.phone) {
+            const whatsapp =
+                business.whatsapp || phone;
+
+
+            const whatsappButton =
+                document.getElementById(
+                    "whatsappButton"
+                );
+
+
+            if (whatsapp) {
 
                 const cleanPhone =
-                    business.phone.replace(/\D/g, "");
+                    whatsapp.replace(/\D/g, "");
 
-                document.getElementById("whatsappButton")
-                    .href =
+
+                whatsappButton.href =
                     `https://wa.me/${cleanPhone}`;
 
+            } else {
+
+                whatsappButton.style.display =
+                    "none";
             }
 
 
@@ -401,31 +536,68 @@
             // ---------------------------------------
 
             document.getElementById("loading")
-                .style.display = "none";
+                .style.display =
+                "none";
+
 
             document.getElementById("profile")
-                .style.display = "block";
+                .style.display =
+                "block";
 
 
         } catch (error) {
 
-            console.error(error);
+            console.error(
+                "Firebase error:",
+                error
+            );
 
-            showError();
+
+            // ---------------------------------------
+            // Permission error
+            // ---------------------------------------
+
+            if (
+                error.code ===
+                "permission-denied"
+            ) {
+
+                showError(
+                    "Firebase denied access to this business. Check your Firestore Security Rules."
+                );
+
+            } else {
+
+                showError(
+                    error.message ||
+                    "Unable to load the business profile."
+                );
+            }
 
         }
 
     }
 
 
-    function showError() {
+    // ---------------------------------------
+    // Show error
+    // ---------------------------------------
+
+    function showError(message) {
 
         document.getElementById("loading")
-            .style.display = "none";
+            .style.display =
+            "none";
+
 
         document.getElementById("error")
-            .style.display = "block";
+            .style.display =
+            "block";
 
+
+        document.getElementById("errorDetail")
+            .textContent =
+            message || "";
     }
 
 </script>
