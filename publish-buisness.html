@@ -954,6 +954,48 @@
                         </div>
 
 
+                        <!-- PASSWORD -->
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Password
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                id="password"
+                                class="input"
+                                type="password"
+                                placeholder="Create a password"
+                                minlength="6"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- CONFIRM PASSWORD -->
+
+                        <div class="form-group">
+
+                            <label class="form-label">
+                                Confirm password
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                id="confirmPassword"
+                                class="input"
+                                type="password"
+                                placeholder="Confirm your password"
+                                minlength="6"
+                                required
+                            >
+
+                        </div>
+
+
                         <!-- PHONE -->
 
                         <div class="form-group">
@@ -1824,19 +1866,11 @@
                      * business document.
                      */
 
-                    /*
                     const previewUrl =
                         window.location.origin +
                         "/view-profile.html?slug=" +
                         encodeURIComponent(slug);
-                        */
 
-                    const previewUrl =
-                        window.location.origin +
-                        "/vanikio-v2/view-profile.html?slug=" +
-                        encodeURIComponent(slug);
-
- 
 
                     generateQRCode(
                         previewUrl
@@ -1944,10 +1978,59 @@
                             .trim();
 
 
+                    const password =
+                        document
+                            .getElementById(
+                                "password"
+                            )
+                            .value;
+
+
+                    const confirmPassword =
+                        document
+                            .getElementById(
+                                "confirmPassword"
+                            )
+                            .value;
+
+
                     if (!businessName) {
 
                         alert(
                             "Please enter your business name."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (!password) {
+
+                        alert(
+                            "Please enter a password."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (password.length < 6) {
+
+                        alert(
+                            "Password must be at least 6 characters."
+                        );
+
+                        return;
+
+                    }
+
+
+                    if (password !== confirmPassword) {
+
+                        alert(
+                            "Password and Confirm Password do not match."
                         );
 
                         return;
@@ -2147,21 +2230,12 @@
                            business document from Firestore.
                         */
 
-                        /*
                         const businessUrl =
                             window.location.origin +
                             "/view-profile.html?id=" +
                             encodeURIComponent(
                                 businessId
-                            ); 
-                        */
-
-                        
-
-                        const businessUrl =
-                           window.location.origin +
-                           "/vanikio-v2/view-profile.html?id=" +
-                            encodeURIComponent(businessId);
+                            );
 
 
                         /* =========================================
@@ -2239,4 +2313,3 @@
 </body>
 
 </html>
-
