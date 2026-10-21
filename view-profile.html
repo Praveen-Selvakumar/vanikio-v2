@@ -720,6 +720,77 @@
     
         }
 
+
+
+        /* ---------------------------------------
+           VANIKIO Leads and Follow-up Tabs
+        --------------------------------------- */
+        .workspace-tabs {
+            display: flex;
+            gap: 8px;
+            margin: 0 0 18px;
+            padding: 7px;
+            background: rgba(255,255,255,0.92);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(25,65,58,0.06);
+        }
+        .workspace-tab {
+            flex: 1;
+            border: 0;
+            border-radius: 11px;
+            padding: 12px 10px;
+            background: transparent;
+            color: var(--muted);
+            font: 700 13px "DM Sans", sans-serif;
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease;
+        }
+        .workspace-tab.active {
+            background: var(--primary);
+            color: #fff;
+        }
+        .workspace-panel {
+            background: rgba(255,255,255,.96);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 26px;
+            box-shadow: 0 20px 50px rgba(25,65,58,.08);
+        }
+        .workspace-panel[hidden] { display: none !important; }
+        .workspace-heading { font-size: 23px; margin-bottom: 6px; }
+        .workspace-subtitle { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+        .lead-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .lead-form .full-width { grid-column: 1 / -1; }
+        .lead-form label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 700; color: #53615d; }
+        .lead-form input, .lead-form select, .lead-form textarea, .lead-status {
+            width: 100%; min-width: 0; padding: 11px 12px; border: 1px solid #dce6e2;
+            border-radius: 10px; background: #fff; color: var(--text); font: 14px "DM Sans", sans-serif;
+        }
+        .lead-form textarea { min-height: 82px; resize: vertical; }
+        .lead-submit {
+            border: 0; border-radius: 11px; padding: 13px 16px; background: var(--primary);
+            color: white; font: 700 13px "DM Sans", sans-serif; cursor: pointer;
+        }
+        .lead-submit:hover { background: var(--primary-dark); }
+        .lead-list { display: grid; gap: 12px; margin-top: 22px; }
+        .lead-item { border: 1px solid #e5ece9; border-radius: 14px; padding: 15px; background: #fbfdfc; }
+        .lead-item-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .lead-name { font-size: 15px; font-weight: 700; overflow-wrap: anywhere; }
+        .lead-meta { margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+        .lead-notes { margin-top: 10px; font-size: 13px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+        .lead-actions { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+        .lead-delete { border: 1px solid #f0d4d4; background: #fff7f7; color: #b42318; border-radius: 9px; padding: 8px 10px; cursor: pointer; font-size: 12px; font-weight: 700; }
+        .empty-leads { padding: 22px; text-align: center; color: var(--muted); background: #f8fbfa; border: 1px dashed #d5e2de; border-radius: 14px; font-size: 13px; }
+        .followup-date { color: var(--primary); font-weight: 700; }
+        @media (max-width: 600px) {
+            .workspace-panel { padding: 19px; }
+            .lead-form { grid-template-columns: 1fr; }
+            .lead-form .full-width { grid-column: auto; }
+            .workspace-tab { padding: 11px 6px; font-size: 12px; }
+            .lead-item-top { flex-direction: column; }
+        }
+
     </style>
     
 
@@ -764,6 +835,34 @@
 
     <div id="profile" style="display:none;">
 
+        <!-- VANIKIO Workspace Tabs -->
+        <div class="workspace-tabs" role="tablist" aria-label="VANIKIO sections">
+            <button type="button" class="workspace-tab active" role="tab" aria-selected="true" data-workspace-tab="profile">Business Profile</button>
+            <button type="button" class="workspace-tab" role="tab" aria-selected="false" data-workspace-tab="leads">Leads</button>
+            <button type="button" class="workspace-tab" role="tab" aria-selected="false" data-workspace-tab="followups">Follow Up</button>
+        </div>
+
+        <section id="leadsPanel" class="workspace-panel" hidden>
+            <h2 class="workspace-heading">Leads</h2>
+            <p class="workspace-subtitle">Add and manage potential customers for this business.</p>
+            <form id="leadForm" class="lead-form">
+                <label>Customer name *<input id="leadName" name="leadName" required maxlength="120" placeholder="Enter customer name"></label>
+                <label>Phone number<input id="leadPhone" name="leadPhone" type="tel" maxlength="30" placeholder="Enter phone number"></label>
+                <label>Status<select id="leadStatus" name="leadStatus"><option>New</option><option>Contacted</option><option>Interested</option><option>Converted</option><option>Lost</option></select></label>
+                <label>Next follow-up date<input id="leadFollowupDate" name="leadFollowupDate" type="date"></label>
+                <label class="full-width">Notes<textarea id="leadNotes" name="leadNotes" maxlength="2000" placeholder="Customer requirements, conversation notes..."></textarea></label>
+                <button class="lead-submit full-width" type="submit">＋ Add Lead</button>
+            </form>
+            <div id="leadList" class="lead-list" aria-live="polite"></div>
+        </section>
+
+        <section id="followupsPanel" class="workspace-panel" hidden>
+            <h2 class="workspace-heading">Follow Up</h2>
+            <p class="workspace-subtitle">Review customers with a scheduled follow-up date. Update their status from the Leads tab.</p>
+            <div id="followupList" class="lead-list" aria-live="polite"></div>
+        </section>
+
+        <div id="businessProfilePanel">
         <div class="profile-card">
 
             <!-- Hero -->
@@ -1073,6 +1172,7 @@
             <strong>VANIKIO</strong>
 
         </div>
+        </div> <!-- end businessProfilePanel -->
 
     </div>
     
@@ -1143,6 +1243,136 @@
 
     const businessId =
         params.get("id");
+
+    // ---------------------------------------
+    // Leads and Follow-up tabs
+    // ---------------------------------------
+    let activeBusinessId = businessId || "unknown-business";
+    const workspaceTabs = document.querySelectorAll("[data-workspace-tab]");
+    const businessProfilePanel = document.getElementById("businessProfilePanel");
+    const leadsPanel = document.getElementById("leadsPanel");
+    const followupsPanel = document.getElementById("followupsPanel");
+    const leadForm = document.getElementById("leadForm");
+
+    function getLeadStorageKey() {
+        return "vanikio_leads_" + activeBusinessId;
+    }
+
+    function readLeads() {
+        try {
+            const saved = JSON.parse(localStorage.getItem(getLeadStorageKey()) || "[]");
+            return Array.isArray(saved) ? saved : [];
+        } catch (error) {
+            console.error("Unable to read saved leads:", error);
+            return [];
+        }
+    }
+
+    function saveLeads(leads) {
+        try {
+            localStorage.setItem(getLeadStorageKey(), JSON.stringify(leads));
+            return true;
+        } catch (error) {
+            console.error("Unable to save leads:", error);
+            alert("Could not save leads in this browser. Please check browser storage settings.");
+            return false;
+        }
+    }
+
+    function escapeLeadText(value) {
+        return String(value ?? "").replace(/[&<>"']/g, function (char) {
+            return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char];
+        });
+    }
+
+    function setWorkspaceTab(tabName) {
+        workspaceTabs.forEach(function (tab) {
+            const selected = tab.dataset.workspaceTab === tabName;
+            tab.classList.toggle("active", selected);
+            tab.setAttribute("aria-selected", String(selected));
+        });
+        businessProfilePanel.hidden = tabName !== "profile";
+        leadsPanel.hidden = tabName !== "leads";
+        followupsPanel.hidden = tabName !== "followups";
+        if (tabName === "leads") renderLeadList();
+        if (tabName === "followups") renderFollowupList();
+    }
+
+    workspaceTabs.forEach(function (tab) {
+        tab.addEventListener("click", function () {
+            setWorkspaceTab(tab.dataset.workspaceTab);
+        });
+    });
+
+    function leadCardMarkup(lead, includeStatus) {
+        const dateText = lead.followupDate
+            ? '<div class="lead-meta">Next follow-up: <span class="followup-date">' + escapeLeadText(lead.followupDate) + '</span></div>'
+            : '<div class="lead-meta">No follow-up date set</div>';
+        const statusControl = includeStatus
+            ? '<div class="lead-actions"><select class="lead-status" aria-label="Lead status" data-status-id="' + escapeLeadText(lead.id) + '">' +
+                ["New", "Contacted", "Interested", "Converted", "Lost"].map(function (status) {
+                    return '<option' + (lead.status === status ? ' selected' : '') + '>' + status + '</option>';
+                }).join("") + '</select><button type="button" class="lead-delete" data-delete-id="' + escapeLeadText(lead.id) + '">Delete</button></div>'
+            : '';
+        return '<article class="lead-item"><div class="lead-item-top"><div><div class="lead-name">' + escapeLeadText(lead.name) + '</div>' +
+            '<div class="lead-meta">' + (lead.phone ? 'Phone: ' + escapeLeadText(lead.phone) + ' · ' : '') + 'Status: ' + escapeLeadText(lead.status || "New") + '</div></div></div>' +
+            dateText + (lead.notes ? '<div class="lead-notes">' + escapeLeadText(lead.notes) + '</div>' : '') + statusControl + '</article>';
+    }
+
+    function renderLeadList() {
+        const list = document.getElementById("leadList");
+        const leads = readLeads().sort(function (a, b) { return (b.createdAt || 0) - (a.createdAt || 0); });
+        list.innerHTML = leads.length ? leads.map(function (lead) { return leadCardMarkup(lead, true); }).join("") : '<div class="empty-leads">No leads yet. Add your first customer using the form above.</div>';
+        list.querySelectorAll("[data-status-id]").forEach(function (select) {
+            select.addEventListener("change", function () {
+                const leads = readLeads();
+                const lead = leads.find(function (item) { return item.id === select.dataset.statusId; });
+                if (lead) { lead.status = select.value; if (saveLeads(leads)) renderLeadList(); }
+            });
+        });
+        list.querySelectorAll("[data-delete-id]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (!confirm("Delete this lead?")) return;
+                const remaining = readLeads().filter(function (item) { return item.id !== button.dataset.deleteId; });
+                if (saveLeads(remaining)) { renderLeadList(); renderFollowupList(); }
+            });
+        });
+    }
+
+    function renderFollowupList() {
+        const list = document.getElementById("followupList");
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const leads = readLeads().filter(function (lead) {
+            return lead.followupDate && !["Converted", "Lost"].includes(lead.status);
+        }).sort(function (a, b) { return a.followupDate.localeCompare(b.followupDate); });
+        const due = leads.filter(function (lead) { return new Date(lead.followupDate + "T00:00:00") <= today; });
+        const upcoming = leads.filter(function (lead) { return new Date(lead.followupDate + "T00:00:00") > today; });
+        const ordered = due.concat(upcoming);
+        list.innerHTML = ordered.length ? ordered.map(function (lead) { return leadCardMarkup(lead, false); }).join("") : '<div class="empty-leads">No follow-ups scheduled. Add a follow-up date to a lead in the Leads tab.</div>';
+    }
+
+    leadForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const name = document.getElementById("leadName").value.trim();
+        if (!name) return;
+        const leads = readLeads();
+        leads.push({
+            id: (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2),
+            name: name,
+            phone: document.getElementById("leadPhone").value.trim(),
+            status: document.getElementById("leadStatus").value,
+            followupDate: document.getElementById("leadFollowupDate").value,
+            notes: document.getElementById("leadNotes").value.trim(),
+            createdAt: Date.now()
+        });
+        if (saveLeads(leads)) {
+            leadForm.reset();
+            renderLeadList();
+            renderFollowupList();
+        }
+    });
+
 
 
     console.log(
