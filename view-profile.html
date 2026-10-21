@@ -1312,8 +1312,8 @@
             ? '<div class="lead-actions"><select class="lead-status" aria-label="Lead status" data-status-id="' + escapeLeadText(lead.id) + '">' +
                 ["New", "Contacted", "Interested", "Converted", "Lost"].map(function (status) {
                     return '<option' + (lead.status === status ? ' selected' : '') + '>' + status + '</option>';
-                }).join("") + '</select><button type="button" class="lead-delete" data-delete-id="' + escapeLeadText(lead.id) + '">Delete</button></div>'
-            : '';
+                }).join("") + '</select></div>'
+            : '<div class="lead-actions"><button type="button" class="lead-delete" data-delete-id="' + escapeLeadText(lead.id) + '">Delete</button></div>';
         return '<article class="lead-item"><div class="lead-item-top"><div><div class="lead-name">' + escapeLeadText(lead.name) + '</div>' +
             '<div class="lead-meta">' + (lead.phone ? 'Phone: ' + escapeLeadText(lead.phone) + ' · ' : '') + 'Status: ' + escapeLeadText(lead.status || "New") + '</div></div></div>' +
             dateText + (lead.notes ? '<div class="lead-notes">' + escapeLeadText(lead.notes) + '</div>' : '') + statusControl + '</article>';
@@ -1330,13 +1330,6 @@
                 if (lead) { lead.status = select.value; if (saveLeads(leads)) renderLeadList(); }
             });
         });
-        list.querySelectorAll("[data-delete-id]").forEach(function (button) {
-            button.addEventListener("click", function () {
-                if (!confirm("Delete this lead?")) return;
-                const remaining = readLeads().filter(function (item) { return item.id !== button.dataset.deleteId; });
-                if (saveLeads(remaining)) { renderLeadList(); renderFollowupList(); }
-            });
-        });
     }
 
     function renderFollowupList() {
@@ -1350,6 +1343,13 @@
         const upcoming = leads.filter(function (lead) { return new Date(lead.followupDate + "T00:00:00") > today; });
         const ordered = due.concat(upcoming);
         list.innerHTML = ordered.length ? ordered.map(function (lead) { return leadCardMarkup(lead, false); }).join("") : '<div class="empty-leads">No follow-ups scheduled. Add a follow-up date to a lead in the Leads tab.</div>';
+        list.querySelectorAll("[data-delete-id]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                if (!confirm("Delete this lead?")) return;
+                const remaining = readLeads().filter(function (item) { return item.id !== button.dataset.deleteId; });
+                if (saveLeads(remaining)) { renderLeadList(); renderFollowupList(); }
+            });
+        });
     }
 
     leadForm.addEventListener("submit", function (event) {
