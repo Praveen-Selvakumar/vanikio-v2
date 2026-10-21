@@ -1,0 +1,13 @@
+<!-- VANIKIO Products tab fragment -->
+<section id="productsPanel" class="workspace-panel" hidden>
+            <h2 class="workspace-heading">Products</h2>
+            <p class="workspace-subtitle">Add a product to this business. It will be saved to Firestore.</p>
+            <form id="productForm" class="catalog-form">
+                <label>Product name *<input id="productNameInput" name="productName" required maxlength="120" placeholder="Enter product name"></label>
+                <button id="productSubmit" class="catalog-submit" type="submit">＋ Add Product</button>
+            </form>
+            <div id="productProgress" class="save-progress" role="progressbar" aria-label="Saving product"><div class="save-progress-bar"></div></div>
+            <div id="productMessage" class="catalog-message" aria-live="polite"></div>
+            <div class="catalog-current-title">Current products</div>
+            <div id="productCurrentList" class="catalog-current-list"></div>
+        </section>

@@ -1,0 +1,13 @@
+<!-- VANIKIO Services tab fragment -->
+<section id="servicesPanel" class="workspace-panel" hidden>
+            <h2 class="workspace-heading">Services</h2>
+            <p class="workspace-subtitle">Add a service to this business. It will be saved to Firestore.</p>
+            <form id="serviceForm" class="catalog-form">
+                <label>Service name *<input id="serviceNameInput" name="serviceName" required maxlength="120" placeholder="Enter service name"></label>
+                <button id="serviceSubmit" class="catalog-submit" type="submit">＋ Add Service</button>
+            </form>
+            <div id="serviceProgress" class="save-progress" role="progressbar" aria-label="Saving service"><div class="save-progress-bar"></div></div>
+            <div id="serviceMessage" class="catalog-message" aria-live="polite"></div>
+            <div class="catalog-current-title">Current services</div>
+            <div id="serviceCurrentList" class="catalog-current-list"></div>
+        </section>
